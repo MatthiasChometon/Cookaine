@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: front
+        working-directory: ./front
     steps:
       - uses: actions/checkout@v2
 
@@ -29,7 +29,9 @@ jobs:
           cache: pnpm
 
       - name: Install
-        run: pnpm install
+        run: |
+          ls
+          pnpm install
 
       - name: ESLint check
         run: pnpm lint
