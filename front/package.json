@@ -3,7 +3,7 @@
   "packageManager": "pnpm@6.32.3",
   "scripts": {
     "build": "vite build",
-    "dev": "vite --port 4000",
+    "dev": "pnpm i && vite --port 4000",
     "lint": "eslint .",
     "preview": "vite preview",
     "preview-https": "serve dist",
