@@ -17,10 +17,10 @@ services:
       - PGDATA=/var/lib/pgsql-v1
     networks:
       vpcbr:
-        ipv4_address: 192.168.3.2
+        ipv4_address: 192.168.4.2
 
   pgadmin:
-    container_name: pgadmin4_container
+    container_name: pgadmin_container
     image: dpage/pgadmin4
     restart: always
     environment:
@@ -43,4 +43,4 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: 192.168.3.0/24
+        - subnet: 192.168.4.0/24

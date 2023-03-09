@@ -36,4 +36,4 @@ lerna-debug.log*
 
 .env*
 
-/csim-db-pg
+/cookaine-db-pg
