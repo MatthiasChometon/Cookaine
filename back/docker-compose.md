@@ -25,7 +25,7 @@ En fonction de la version de docker
 ### Connect to database with pgadmin
 1. Right clic on "Server";
 2. Click on "Register" > "Server";
-3. Set name : "csim"
+3. Set name : "cookaine"
 4. Go to "Connection" tab
 5. Set Host name/address : "192.168.3.2"
 6. Set username : postgres
@@ -42,7 +42,7 @@ Servers
     │  
     └── Databases
         │  
-        └── csim
+        └── cookaine
             │  
             └── Schemas
                 │  
