@@ -1,4 +1,4 @@
-import { Field, ID, Int, ObjectType } from '@nestjs/graphql'
+import { Field, Int, ObjectType } from '@nestjs/graphql'
 import { User } from 'src/user/entities/user.entity'
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm'
 import { Difficulty } from '../enums/difficulty.enum'
@@ -25,19 +25,21 @@ export class Recipe extends BaseEntity {
 	@Field()
 	cookingTime: string
 
-	@Column({ type: 'enum', enum: Difficulty })
-	difficulty: Difficulty
+    @Column({ type: 'enum', enum: Difficulty })
+    @Field()
+    difficulty: Difficulty
 
 	@Column({ type: 'int' })
 	@Field(() => Int)
 	portion: number
 
-	@Column('text', { array: true })
-	steps: string[]
+    @Column('text', { array: true })
+    @Field(() => [String])
+    steps: string[]
 
-	@Field(() => User)
-	@ManyToOne(() => User, (user: User) => user.recipes)
-	creator: User
+    @Field(() => User)
+    @ManyToOne(() => User, ({ recipes }) => recipes)
+    creator: User
 
 	@Field(() => [RecipeIngredient], { defaultValue: [] })
 	@OneToMany(() => RecipeIngredient, ({ recipe }) => recipe)

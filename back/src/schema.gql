@@ -4,6 +4,7 @@
 
 type Ingredient {
   id: ID!
+  mesureUnits: [MesureUnit!]!
   name: String!
   previewPicture: String!
   recipeIngredients: [RecipeIngredient!]!
@@ -28,11 +29,13 @@ type Query {
 type Recipe {
   cookingTime: String!
   creator: User!
+  difficulty: String!
   id: ID!
   portion: Int!
   previewPicture: String!
   recipeIngredients: [RecipeIngredient!]!
   recipeTags: [RecipeTag!]!
+  steps: [String!]!
   title: String!
   tutorialVideo: String!
 }
@@ -53,6 +56,7 @@ type RecipeTag {
 
 type Tag {
   id: ID!
+  name: String!
   recipeTags: [RecipeTag!]!
 }
 
