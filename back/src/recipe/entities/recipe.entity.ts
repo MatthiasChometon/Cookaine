@@ -34,7 +34,7 @@ export class Recipe extends BaseEntity {
     portion: number
 
     @Column('text', { array: true })
-    @Field()
+    @Field(() => [String])
     steps: string[]
 
     @Field(() => User)
