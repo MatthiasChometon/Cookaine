@@ -1,18 +1,21 @@
-name: CI
+name: Front
 
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
     paths:
-      - 'front'
+      - 'front/**'
 
 jobs:
   lint:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./front
     steps:
       - uses: actions/checkout@v2
 
@@ -26,7 +29,9 @@ jobs:
           cache: pnpm
 
       - name: Install
-        run: pnpm install
+        run: |
+          ls
+          pnpm install
 
       - name: ESLint check
         run: pnpm lint
