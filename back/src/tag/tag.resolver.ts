@@ -1,7 +1,7 @@
-import { Resolver } from '@nestjs/graphql';
-import { TagService } from './tag.service';
+import { Resolver } from '@nestjs/graphql'
+import { TagService } from './tag.service'
 
 @Resolver()
 export class TagResolver {
-  constructor(private readonly tagService: TagService) {}
+	constructor(private readonly tagService: TagService) {}
 }

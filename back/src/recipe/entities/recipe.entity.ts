@@ -9,41 +9,41 @@ import { RecipeTag } from 'src/tag/entities/recipe-tag.entity'
 @Entity({ name: 'recipe' })
 @ObjectType()
 export class Recipe extends BaseEntity {
-    @Column()
-    @Field()
-    title: string
+	@Column()
+	@Field()
+	title: string
 
-    @Column({ length: 510 })
-    @Field()
-    previewPicture: string
+	@Column({ length: 510 })
+	@Field()
+	previewPicture: string
 
-    @Column({ length: 510 })
-    @Field()
-    tutorialVideo: string
+	@Column({ length: 510 })
+	@Field()
+	tutorialVideo: string
 
-    @Column('time')
-    @Field()
-    cookingTime: string
+	@Column('time')
+	@Field()
+	cookingTime: string
 
-    @Column({ type: 'enum', enum: Difficulty })
-    difficulty: Difficulty
+	@Column({ type: 'enum', enum: Difficulty })
+	difficulty: Difficulty
 
-    @Column({ type: 'int' })
-    @Field(() => Int)
-    portion: number
+	@Column({ type: 'int' })
+	@Field(() => Int)
+	portion: number
 
-    @Column('text', { array: true })
-    steps: string[]
+	@Column('text', { array: true })
+	steps: string[]
 
-    @Field(() => User)
-    @ManyToOne(() => User, (user: User) => user.recipes)
-    creator: User
+	@Field(() => User)
+	@ManyToOne(() => User, (user: User) => user.recipes)
+	creator: User
 
-    @Field(() => [RecipeIngredient], { defaultValue: [] })
-    @OneToMany(() => RecipeIngredient, ({ recipe }) => recipe)
-    recipeIngredients: RecipeIngredient[]
+	@Field(() => [RecipeIngredient], { defaultValue: [] })
+	@OneToMany(() => RecipeIngredient, ({ recipe }) => recipe)
+	recipeIngredients: RecipeIngredient[]
 
-    @Field(() => [RecipeTag], { defaultValue: [] })
-    @OneToMany(() => RecipeTag, ({ recipe }) => recipe)
-    recipeTags: RecipeTag[]
+	@Field(() => [RecipeTag], { defaultValue: [] })
+	@OneToMany(() => RecipeTag, ({ recipe }) => recipe)
+	recipeTags: RecipeTag[]
 }
