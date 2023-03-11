@@ -16,6 +16,7 @@ export class Ingredient extends BaseEntity {
     previewPicture: string
 
     @Column({ type: 'enum', enum: MesureUnit, array: true })
+    @Field(() => [MesureUnit], { defaultValue: [] })
     mesureUnits: MesureUnit[]
 
     @Field(() => [RecipeIngredient], { defaultValue: [] })
