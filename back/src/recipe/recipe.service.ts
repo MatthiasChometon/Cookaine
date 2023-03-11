@@ -7,7 +7,7 @@ import { Repository } from 'typeorm'
 export class RecipeService {
 	constructor(
 		@InjectRepository(Recipe)
-		private readonly recipeRepository: Repository<Recipe>
+		private readonly recipeRepository: Repository<Recipe>,
 	) {}
 
 	async all(): Promise<Recipe[]> {

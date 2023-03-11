@@ -9,7 +9,7 @@ import { UserModule } from './user/user.module'
 import { IngredientModule } from './ingredient/ingredient.module'
 import { TagModule } from './tag/tag.module'
 
-type DatabaseType = 'mysql' | 'postgres' | 'mariadb' | 'sqlite' |  'mssql'
+type DatabaseType = 'mysql' | 'postgres' | 'mariadb' | 'sqlite' | 'mssql'
 
 @Module({
 	imports: [

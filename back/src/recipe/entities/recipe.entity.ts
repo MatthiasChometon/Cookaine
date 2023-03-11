@@ -25,21 +25,21 @@ export class Recipe extends BaseEntity {
 	@Field()
 	cookingTime: string
 
-    @Column({ type: 'enum', enum: Difficulty })
-    @Field()
-    difficulty: Difficulty
+	@Column({ type: 'enum', enum: Difficulty })
+	@Field()
+	difficulty: Difficulty
 
 	@Column({ type: 'int' })
 	@Field(() => Int)
 	portion: number
 
-    @Column('text', { array: true })
-    @Field(() => [String])
-    steps: string[]
+	@Column('text', { array: true })
+	@Field(() => [String])
+	steps: string[]
 
-    @Field(() => User)
-    @ManyToOne(() => User, ({ recipes }) => recipes)
-    creator: User
+	@Field(() => User)
+	@ManyToOne(() => User, ({ recipes }) => recipes)
+	creator: User
 
 	@Field(() => [RecipeIngredient], { defaultValue: [] })
 	@OneToMany(() => RecipeIngredient, ({ recipe }) => recipe)
