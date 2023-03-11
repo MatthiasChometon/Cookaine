@@ -1,7 +1,7 @@
 dist
 public
 src/common/generated/
-.env.local
+.env*
 **/*.json
 **/*.yml
 /node_modules
