@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": ".github"
+		},
+		{
+			"path": "back"
+		},
+		{
+			"path": "front"
+		}
+	]
+}
