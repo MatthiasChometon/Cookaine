@@ -1,7 +1,7 @@
-import { Resolver } from '@nestjs/graphql';
-import { IngredientService } from './ingredient.service';
+import { Resolver } from '@nestjs/graphql'
+import { IngredientService } from './ingredient.service'
 
 @Resolver()
 export class IngredientResolver {
-  constructor(private readonly ingredientService: IngredientService) {}
+	constructor(private readonly ingredientService: IngredientService) {}
 }

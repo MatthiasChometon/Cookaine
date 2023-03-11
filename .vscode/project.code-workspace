@@ -1,0 +1,27 @@
+{
+	"folders": [
+		{
+			"name": "front",
+			"path": "../front"
+		},
+		{
+			"name": "back",
+			"path": "../back"
+		},
+		{
+			"name": "root-config",
+			"path": "../",
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"node_modules/": true,
+			"packages/": true,
+			"**/back/**": true,
+			"**/front/**": true
+		},
+		"i18n-ally.localesPaths": [
+			"locales"
+		],
+	}
+}
