@@ -1,0 +1,79 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Ingredient {
+  id: ID!
+  mesureUnits: [MesureUnit!]!
+  name: String!
+  previewPicture: String!
+  recipeIngredients: [RecipeIngredient!]!
+}
+
+enum MesureUnit {
+  Centiliters
+  Gram
+  Kilogram
+  Liter
+  Milliliter
+  Pinch
+  Tablespoon
+  Teaspoon
+  Unity
+}
+
+type Query {
+  recipes: [Recipe!]!
+}
+
+type Recipe {
+  cookingTime: String!
+  creator: User!
+  difficulty: String!
+  id: ID!
+  portion: Int!
+  previewPicture: String!
+  recipeIngredients: [RecipeIngredient!]!
+  recipeTags: [RecipeTag!]!
+  steps: [String!]!
+  title: String!
+  tutorialVideo: String!
+}
+
+type RecipeIngredient {
+  id: ID!
+  ingredient: Ingredient!
+  mesureUnit: MesureUnit!
+  quantity: Int!
+  recipe: Recipe!
+}
+
+type RecipeTag {
+  id: ID!
+  recipe: Recipe!
+  tag: Tag!
+}
+
+type Tag {
+  id: ID!
+  name: String!
+  recipeTags: [RecipeTag!]!
+}
+
+type User {
+  email: String!
+  id: ID!
+  recipes: [Recipe!]!
+  role: UserRoles!
+  status: UserStatus!
+}
+
+enum UserRoles {
+  admin
+  user
+}
+
+enum UserStatus {
+  isActive
+  isPending
+}

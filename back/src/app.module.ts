@@ -4,6 +4,10 @@ import { GraphQLModule } from '@nestjs/graphql'
 import { join } from 'path'
 import { ConfigModule } from '@nestjs/config/dist/config.module'
 import { TypeOrmModule } from '@nestjs/typeorm'
+import { RecipeModule } from './recipe/recipe.module';
+import { UserModule } from './user/user.module';
+import { IngredientModule } from './ingredient/ingredient.module';
+import { TagModule } from './tag/tag.module';
 
 type DatabaseType = 'mysql' | 'postgres' | 'mariadb' | 'sqlite' | 'mssql'
 
@@ -27,6 +31,10 @@ type DatabaseType = 'mysql' | 'postgres' | 'mariadb' | 'sqlite' | 'mssql'
       autoLoadEntities: true,
       synchronize: process.env.DATABASE_SYNCHRONIZE === 'true',
     }),
+    RecipeModule,
+    UserModule,
+    IngredientModule,
+    TagModule,
   ],
 })
-export class AppModule {}
+export class AppModule { }
