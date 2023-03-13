@@ -3,7 +3,7 @@ import { BaseEntity } from 'src/database/objects/base-entity'
 import { Recipe } from 'src/recipe/entities/recipe.entity'
 import { Column, Entity, ManyToOne } from 'typeorm'
 import { MesureUnit } from '../enums/mesure-unit.enum'
-import { Ingredient } from './ingredient/ingredient.entity'
+import { Ingredient } from './ingredient.entity'
 
 @Entity({ name: 'recipeIngredient' })
 @ObjectType()
