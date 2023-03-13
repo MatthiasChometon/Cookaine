@@ -1,4 +1,4 @@
-import { Field, ObjectType } from '@nestjs/graphql'
+import { ObjectType, Field } from '@nestjs/graphql'
 import { Column, Entity, OneToMany } from 'typeorm'
 import { UserRoles } from '../enums/user-roles.enum'
 import { UserStatus } from '../enums/user-status.enum'
@@ -7,7 +7,7 @@ import { BaseEntity } from 'src/database/objects/base-entity'
 
 @Entity({ name: 'user' })
 @ObjectType()
-export class User extends BaseEntity {
+export class UserEntity extends BaseEntity {
 	@Column({ unique: true })
 	@Field()
 	email: string
