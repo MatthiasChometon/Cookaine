@@ -8,6 +8,8 @@ import { RecipeModule } from './recipe/recipe.module'
 import { UserModule } from './user/user.module'
 import { IngredientModule } from './ingredient/ingredient.module'
 import { TagModule } from './tag/tag.module'
+import { EmailModule } from './email/email.module'
+import { AuthModule } from './auth/auth.module'
 
 type DatabaseType = 'mysql' | 'postgres' | 'mariadb' | 'sqlite' | 'mssql'
 
@@ -35,6 +37,9 @@ type DatabaseType = 'mysql' | 'postgres' | 'mariadb' | 'sqlite' | 'mssql'
 		UserModule,
 		IngredientModule,
 		TagModule,
+		EmailModule,
+		UserModule,
+		AuthModule,
 	],
 })
 export class AppModule {}
