@@ -2,12 +2,30 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input CreateUserInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+}
+
 type Ingredient {
   id: ID!
   mesureUnits: [MesureUnit!]!
   name: String!
   previewPicture: String!
   recipeIngredients: [RecipeIngredient!]!
+}
+
+type LoginResponse {
+  accessToken: String!
+  refreshToken: String!
+  user: User!
+}
+
+input LoginUserInput {
+  email: String!
+  password: String!
 }
 
 enum MesureUnit {
@@ -22,7 +40,19 @@ enum MesureUnit {
   Unity
 }
 
+type Mutation {
+  confirmEmail(email: String!, emailCode: Float!): LoginResponse!
+  login(loginUserInput: LoginUserInput!): LoginResponse!
+  refreshTokens(refreshToken: String!): LoginResponse!
+  register(createUserInput: CreateUserInput!): User!
+  resetPassword(email: String!, emailCode: Float!, newPassword: String!): LoginResponse!
+  sendRegisterConfirmation(email: String!): User!
+  sendResetPasswordCode(email: String!): String!
+  updateAccount(updateUserInput: UpdateUserInput!): User!
+}
+
 type Query {
+  account: User!
   recipes: [Recipe!]!
 }
 
@@ -60,6 +90,12 @@ type Tag {
   recipeTags: [RecipeTag!]!
 }
 
+input UpdateUserInput {
+  firstName: String
+  lastName: String
+  password: String
+}
+
 type User {
   email: String!
   id: ID!
@@ -71,6 +107,7 @@ type User {
 enum UserRoles {
   admin
   user
+  visitor
 }
 
 enum UserStatus {
