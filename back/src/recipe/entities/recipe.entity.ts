@@ -1,10 +1,10 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
-import { User } from 'src/user/entities/user.entity'
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm'
 import { Difficulty } from '../enums/difficulty.enum'
 import { BaseEntity } from 'src/database/objects/base-entity'
 import { RecipeIngredient } from 'src/ingredient/entities/recipe-ingredient.entity'
 import { RecipeTag } from 'src/tag/entities/recipe-tag.entity'
+import { User } from 'src/user/methods/user.methods'
 
 @Entity({ name: 'recipe' })
 @ObjectType()
