@@ -2,6 +2,12 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input CreateIngredientInput {
+  mesureUnits: [MesureUnit!]!
+  name: String!
+  previewPicture: String!
+}
+
 input CreateUserInput {
   email: String!
   firstName: String!
@@ -9,12 +15,38 @@ input CreateUserInput {
   password: String!
 }
 
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+enum Difficulty {
+  easy
+  hard
+  medium
+}
+
+input FilterInput {
+  isFromConnectedUser: Boolean
+  pagination: PaginationInput
+  search: String
+  userId: String
+}
+
 type Ingredient {
   id: ID!
-  mesureUnits: [MesureUnit!]!
   name: String!
   previewPicture: String!
-  recipeIngredients: [RecipeIngredient!]!
+}
+
+type IngredientOuput {
+  ingredientId: ID!
+  mesureUnit: MesureUnit!
+  name: String!
+  possibleMesureUnits: [MesureUnit!]!
+  previewPicture: String!
+  quantity: Int!
+  recipeIngredientId: ID!
 }
 
 type LoginResponse {
@@ -35,13 +67,16 @@ enum MesureUnit {
   Liter
   Milliliter
   Pinch
+  Sachet
   Tablespoon
   Teaspoon
   Unity
 }
 
 type Mutation {
+  banUser(id: String!): User!
   confirmEmail(email: String!, emailCode: Float!): LoginResponse!
+  createIngredient(input: CreateIngredientInput!): Ingredient!
   login(loginUserInput: LoginUserInput!): LoginResponse!
   refreshTokens(refreshToken: String!): LoginResponse!
   register(createUserInput: CreateUserInput!): User!
@@ -49,33 +84,67 @@ type Mutation {
   sendRegisterConfirmation(email: String!): User!
   sendResetPasswordCode(email: String!): String!
   updateAccount(updateUserInput: UpdateUserInput!): User!
+  updateIngredient(id: String!, input: UpdateIngredientInput!): Ingredient!
+}
+
+enum OrderDirection {
+  ASC
+  DESC
+}
+
+input PaginationInput {
+  itemsPerPage: Int!
+  page: Int!
 }
 
 type Query {
   account: User!
-  recipes: [Recipe!]!
+  ingredients: [Ingredient!]!
+  recipes(options: RecipeSearchInput!): [RecipeOutput!]!
+  tags: [Tag!]!
+  user(id: String!): User!
+  users: [User!]!
 }
 
 type Recipe {
   cookingTime: String!
+  creationDate: DateTime!
   creator: User!
-  difficulty: String!
+  difficulty: Difficulty!
   id: ID!
   portion: Int!
   previewPicture: String!
-  recipeIngredients: [RecipeIngredient!]!
-  recipeTags: [RecipeTag!]!
   steps: [String!]!
   title: String!
   tutorialVideo: String!
 }
 
-type RecipeIngredient {
+input RecipeOrderInput {
+  direction: OrderDirection!
+  name: RecipeOrderName!
+}
+
+enum RecipeOrderName {
+  creationDate
+}
+
+type RecipeOutput {
+  cookingTime: String!
+  creationDate: DateTime!
+  creator: User!
+  difficulty: Difficulty!
   id: ID!
-  ingredient: Ingredient!
-  mesureUnit: MesureUnit!
-  quantity: Int!
-  recipe: Recipe!
+  ingredients: [IngredientOuput!]!
+  portion: Int!
+  previewPicture: String!
+  steps: [String!]!
+  title: String!
+  tutorialVideo: String!
+}
+
+input RecipeSearchInput {
+  filterBy: FilterInput = {}
+  orderBy: RecipeOrderInput = {direction: DESC, name: creationDate}
 }
 
 type RecipeTag {
@@ -88,6 +157,12 @@ type Tag {
   id: ID!
   name: String!
   recipeTags: [RecipeTag!]!
+}
+
+input UpdateIngredientInput {
+  mesureUnits: [MesureUnit!]
+  name: String
+  previewPicture: String
 }
 
 input UpdateUserInput {
@@ -107,10 +182,10 @@ type User {
 enum UserRoles {
   admin
   user
-  visitor
 }
 
 enum UserStatus {
   isActive
+  isBanned
   isPending
 }
