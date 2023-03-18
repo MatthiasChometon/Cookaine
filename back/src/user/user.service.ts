@@ -13,7 +13,7 @@ export class UserService {
 	) {}
 
 	async update(
-		user: Partial<UpdateUserInput> | number,
+		user: Partial<UpdateUserInput> | string,
 		payload: Partial<User>,
 	): Promise<void> {
 		await this.userRepository.update(user, { ...payload })
@@ -26,7 +26,7 @@ export class UserService {
 		})
 	}
 
-	async updateAndGet(id: number, payload: Partial<User>): Promise<User> {
+	async updateAndGet(id: string, payload: Partial<User>): Promise<User> {
 		await this.userRepository.update({ id }, { ...payload })
 		return await this.userRepository.findOneBy({ id })
 	}
