@@ -7,6 +7,7 @@ import { LoginResponse } from './dto/login-response'
 import { LoginUserInput } from './dto/login-user.input'
 import { GqlAuthGuard } from './guards/gql-auth-guard'
 import { TokenService } from './token.service'
+import { IsPublic } from './guards/is-public.guard'
 
 @Resolver()
 export class AuthResolver {
@@ -31,18 +32,17 @@ export class AuthResolver {
 	}
 
 	@UseGuards(GqlAuthGuard)
+	@IsPublic()
 	@Mutation(() => LoginResponse)
 	login(
-		@Args('loginUserInput') loginUserInput: LoginUserInput,
+		@Args('loginUserInput') _loginUserInput: LoginUserInput,
 		@Context() context,
 	): Promise<LoginResponse> {
 		return this.authService.login(context.user)
 	}
 
 	@Mutation(() => LoginResponse)
-	refreshTokens(
-		@Args('refreshToken') refreshToken: string,
-	): Promise<LoginResponse> {
+	refreshTokens(@Args('refreshToken') refreshToken: string): Promise<LoginResponse> {
 		return this.tokenService.refresh(refreshToken)
 	}
 
