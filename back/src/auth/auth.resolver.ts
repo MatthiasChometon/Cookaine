@@ -10,10 +10,7 @@ import { TokenService } from './token.service'
 
 @Resolver()
 export class AuthResolver {
-	constructor(
-		private authService: AuthService,
-		private tokenService: TokenService,
-	) {}
+	constructor(private authService: AuthService, private tokenService: TokenService) {}
 
 	@Mutation(() => User)
 	register(@Args('createUserInput') input: CreateUserInput): Promise<User> {
