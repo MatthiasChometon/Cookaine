@@ -10,6 +10,7 @@ export enum MesureUnit {
 	Unity = 'unity',
 	Pinch = 'pinch',
 	Centiliters = 'centiliters',
+	Sachet = 'sachet',
 }
 
 registerEnumType(MesureUnit, {

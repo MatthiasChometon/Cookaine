@@ -3,7 +3,7 @@ import { PrimaryGeneratedColumn } from 'typeorm'
 
 @ObjectType()
 export abstract class BaseEntity {
-	@PrimaryGeneratedColumn()
+	@PrimaryGeneratedColumn('uuid')
 	@Field(() => ID)
-	id: number
+	id: string
 }
