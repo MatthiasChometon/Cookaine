@@ -20,18 +20,13 @@ export class UserSubscriber implements EntitySubscriberInterface<User> {
 
 	async beforeInsert(event: InsertEvent<User>): Promise<void> {
 		event.entity.emailCode = this.authService.createSixDigitsCode()
-		event.entity.password = await this.authService.hashPassword(
-			event.entity.password,
-		)
+		event.entity.password = await this.authService.hashPassword(event.entity.password)
 	}
 
 	async beforeUpdate(event: UpdateEvent<User>): Promise<void> {
 		const isUpdatingPassword = event.entity.password !== undefined
-		if (!isUpdatingPassword || this.authService.isHashed(event.entity.password))
-			return
+		if (!isUpdatingPassword || this.authService.isHashed(event.entity.password)) return
 
-		event.entity.password = await this.authService.hashPassword(
-			event.entity.password,
-		)
+		event.entity.password = await this.authService.hashPassword(event.entity.password)
 	}
 }
