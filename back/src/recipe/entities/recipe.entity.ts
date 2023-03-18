@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
-import { Column, Entity, ManyToOne, OneToMany } from 'typeorm'
+import { Column, CreateDateColumn, Entity, Index, ManyToOne, OneToMany } from 'typeorm'
 import { Difficulty } from '../enums/difficulty.enum'
 import { BaseEntity } from 'src/database/objects/base-entity'
 import { RecipeIngredient } from 'src/ingredient/entities/recipe-ingredient.entity'
@@ -11,6 +11,7 @@ import { User } from 'src/user/methods/user.methods'
 export class Recipe extends BaseEntity {
 	@Column()
 	@Field()
+	@Index()
 	title: string
 
 	@Column({ length: 510 })
@@ -26,7 +27,7 @@ export class Recipe extends BaseEntity {
 	cookingTime: string
 
 	@Column({ type: 'enum', enum: Difficulty })
-	@Field()
+	@Field(() => Difficulty)
 	difficulty: Difficulty
 
 	@Column({ type: 'int' })
@@ -35,17 +36,20 @@ export class Recipe extends BaseEntity {
 
 	@Column('text', { array: true })
 	@Field(() => [String])
+	@Index()
 	steps: string[]
 
 	@Field(() => User)
 	@ManyToOne(() => User, ({ recipes }) => recipes)
 	creator: User
 
-	@Field(() => [RecipeIngredient], { defaultValue: [] })
+	@CreateDateColumn()
+	@Field(() => Date)
+	creationDate: Date
+
 	@OneToMany(() => RecipeIngredient, ({ recipe }) => recipe)
 	recipeIngredients: RecipeIngredient[]
 
-	@Field(() => [RecipeTag], { defaultValue: [] })
 	@OneToMany(() => RecipeTag, ({ recipe }) => recipe)
 	recipeTags: RecipeTag[]
 }
