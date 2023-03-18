@@ -9,6 +9,7 @@ import { RecipeIngredient } from './recipe-ingredient.entity'
 export class Ingredient extends BaseEntity {
 	@Column()
 	@Field()
+	@Index()
 	name: string
 
 	@Column({ length: 510 })
