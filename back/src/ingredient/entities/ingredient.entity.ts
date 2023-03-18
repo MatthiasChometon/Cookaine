@@ -1,6 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql'
 import { BaseEntity } from 'src/database/objects/base-entity'
-import { Column, Entity, OneToMany } from 'typeorm'
+import { Column, Entity, Index, OneToMany } from 'typeorm'
 import { MesureUnit } from '../enums/mesure-unit.enum'
 import { RecipeIngredient } from './recipe-ingredient.entity'
 
@@ -17,10 +17,8 @@ export class Ingredient extends BaseEntity {
 	previewPicture: string
 
 	@Column({ type: 'enum', enum: MesureUnit, array: true })
-	@Field(() => [MesureUnit], { defaultValue: [] })
 	mesureUnits: MesureUnit[]
 
-	@Field(() => [RecipeIngredient], { defaultValue: [] })
 	@OneToMany(() => RecipeIngredient, ({ ingredient }) => ingredient)
 	recipeIngredients: RecipeIngredient[]
 }

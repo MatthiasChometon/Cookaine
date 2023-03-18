@@ -8,11 +8,9 @@ import { Ingredient } from './ingredient.entity'
 @Entity({ name: 'recipeIngredient' })
 @ObjectType()
 export class RecipeIngredient extends BaseEntity {
-	@Field(() => Recipe)
 	@ManyToOne(() => Recipe, ({ recipeIngredients }) => recipeIngredients)
 	recipe: Recipe
 
-	@Field(() => Ingredient)
 	@ManyToOne(() => Ingredient, ({ recipeIngredients }) => recipeIngredients)
 	ingredient: Ingredient
 
