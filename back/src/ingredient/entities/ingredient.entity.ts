@@ -7,12 +7,12 @@ import { RecipeIngredient } from './recipe-ingredient.entity'
 @Entity({ name: 'ingredient' })
 @ObjectType()
 export class Ingredient extends BaseEntity {
-	@Column()
+	@Column({ unique: true })
 	@Field()
 	@Index()
 	name: string
 
-	@Column({ length: 510 })
+	@Column({ length: 510, unique: true })
 	@Field()
 	previewPicture: string
 
