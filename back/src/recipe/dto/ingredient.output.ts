@@ -4,12 +4,15 @@ import { RecipeIngredient } from 'src/ingredient/entities/recipe-ingredient.enti
 import { MesureUnit } from 'src/ingredient/enums/mesure-unit.enum'
 
 @ObjectType()
-class IngredientOutput extends PickType(Ingredient, ['name', 'previewPicture']) {}
+class IngredientOutputData extends PickType(Ingredient, ['name', 'previewPicture']) {}
 @ObjectType()
-class RecipeIngredientOutput extends PickType(RecipeIngredient, ['quantity', 'mesureUnit']) {}
+class RecipeIngredientOutputData extends PickType(RecipeIngredient, ['quantity', 'mesureUnit']) {}
 
 @ObjectType()
-export class IngredientOuput extends IntersectionType(IngredientOutput, RecipeIngredientOutput) {
+export class IngredientOutput extends IntersectionType(
+	IngredientOutputData,
+	RecipeIngredientOutputData,
+) {
 	@Field(() => ID)
 	ingredientId: string
 
