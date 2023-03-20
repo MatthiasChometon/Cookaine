@@ -4,15 +4,28 @@ import { Ingredient } from './entities/ingredient.entity'
 import { Repository } from 'typeorm'
 import { CreateIngredientInput } from './dto/create-ingredient.input'
 import { UpdateIngredientInput } from './dto/update-ingredient.input'
-import { IngredientOuput } from 'src/recipe/dto/ingredient.output'
+import { IngredientOutput } from 'src/recipe/dto/ingredient.output'
 import { RecipeIngredient } from './entities/recipe-ingredient.entity'
+import { CreateRecipeIngredientInput } from 'src/recipe/dto/create-recipe-ingredient.input'
 
 @Injectable()
 export class IngredientService {
 	constructor(
 		@InjectRepository(Ingredient)
 		private readonly ingredientRepository: Repository<Ingredient>,
+		@InjectRepository(RecipeIngredient)
+		private readonly recipeIngredientRepository: Repository<RecipeIngredient>,
 	) {}
+
+	async removeIngredient(id: string): Promise<Ingredient> {
+		const [ingredientRemoved] = await Promise.all([
+			this.ingredientRepository.findOneByOrFail({ id }),
+			this.recipeIngredientRepository.softDelete({ ingredient: { id } }),
+		])
+
+		await this.ingredientRepository.softDelete({ id })
+		return ingredientRemoved
+	}
 
 	async updateIngredient(id: string, input: UpdateIngredientInput): Promise<Ingredient> {
 		await this.ingredientRepository.update({ id }, input)
@@ -25,14 +38,15 @@ export class IngredientService {
 		return await this.ingredientRepository.findOneByOrFail({ id })
 	}
 
-	convertToIngredientListOuput(recipeIngredientList: RecipeIngredient[]): IngredientOuput[] {
+	convertToIngredientListOuput(recipeIngredientList: RecipeIngredient[]): IngredientOutput[] {
 		return recipeIngredientList.map((recipeIngredient) =>
-			this.convertToIngredientOuput(recipeIngredient),
+			this.convertToIngredientOutput(recipeIngredient),
 		)
 	}
 
-	convertToIngredientOuput(recipeIngredient: RecipeIngredient): IngredientOuput {
+	convertToIngredientOutput(recipeIngredient: RecipeIngredient): IngredientOutput {
 		const { quantity, mesureUnit, id: recipeIngredientId, ingredient } = recipeIngredient
+		if (ingredient == null) console.log(recipeIngredient)
 		const { id: ingredientId, name, previewPicture, mesureUnits: possibleMesureUnits } = ingredient
 		return {
 			ingredientId,
@@ -43,5 +57,20 @@ export class IngredientService {
 			possibleMesureUnits,
 			mesureUnit,
 		}
+	}
+
+	async createRecipeIngredients(
+		ingredients: CreateRecipeIngredientInput[],
+	): Promise<RecipeIngredient[]> {
+		return await Promise.all(
+			ingredients.map(async ({ id, quantity, mesureUnit }) => {
+				const ingredient = await this.ingredientRepository.findOneByOrFail({ id })
+				return this.recipeIngredientRepository.create({
+					quantity,
+					mesureUnit,
+					ingredient,
+				})
+			}),
+		)
 	}
 }
