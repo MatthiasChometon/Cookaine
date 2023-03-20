@@ -4,6 +4,7 @@ import { UserStatus } from '../enums/user-status.enum'
 import * as bcrypt from 'bcrypt'
 import { Entity } from 'typeorm'
 import { AuthService } from 'src/auth/auth.service'
+import { UserRoles } from '../enums/user-roles.enum'
 
 @Entity({ name: 'user' })
 @ObjectType()
@@ -15,6 +16,14 @@ export class User extends UserEntity {
 
 	isActive(): boolean {
 		return this.status === UserStatus.isActive
+	}
+
+	isAdmin(): boolean {
+		return this.role === UserRoles.admin
+	}
+
+	isCreatorOfRecipe(recipeId: string): boolean {
+		return this.id === recipeId
 	}
 
 	activateAccount(): User {
