@@ -8,24 +8,12 @@ import { IngredientService } from 'src/ingredient/ingredient.service'
 import { TagService } from 'src/tag/tag.service'
 import { CreateRecipeInput } from './dto/create-recipe.input'
 import { User } from 'src/user/methods/user.methods'
-import { Tag } from 'src/tag/entities/tag.entity'
-import { RecipeIngredient } from 'src/ingredient/entities/recipe-ingredient.entity'
-import { Ingredient } from 'src/ingredient/entities/ingredient.entity'
-import { RecipeTag } from 'src/tag/entities/recipe-tag.entity'
 
 @Injectable()
 export class RecipeService {
 	constructor(
 		@InjectRepository(Recipe)
 		private readonly recipeRepository: Repository<Recipe>,
-		@InjectRepository(Tag)
-		private readonly tagRepository: Repository<Tag>,
-		@InjectRepository(RecipeIngredient)
-		private readonly recipeIngredientRepository: Repository<RecipeIngredient>,
-		@InjectRepository(Ingredient)
-		private readonly recipeTagRepository: Repository<RecipeTag>,
-		@InjectRepository(RecipeTag)
-		private readonly ingredientRepository: Repository<Ingredient>,
 		private readonly ingredientService: IngredientService,
 		private readonly tagService: TagService,
 	) {}
