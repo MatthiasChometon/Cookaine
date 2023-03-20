@@ -28,4 +28,9 @@ export class RecipeResolver {
 	): Promise<RecipeOutput> {
 		return this.recipeService.createRecipe(input, user)
 	}
+
+	@Mutation(() => Recipe)
+	deleteRecipe(@Args('id') id: string, @CurrentUser() user: User): Promise<Recipe> {
+		return this.recipeService.deleteRecipe(id, user)
+	}
 }
