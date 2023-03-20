@@ -1,5 +1,13 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
-import { Column, CreateDateColumn, Entity, Index, ManyToOne, OneToMany } from 'typeorm'
+import {
+	Column,
+	CreateDateColumn,
+	DeleteDateColumn,
+	Entity,
+	Index,
+	ManyToOne,
+	OneToMany,
+} from 'typeorm'
 import { Difficulty } from '../enums/difficulty.enum'
 import { BaseEntity } from 'src/database/objects/base-entity'
 import { RecipeIngredient } from 'src/ingredient/entities/recipe-ingredient.entity'
@@ -53,4 +61,7 @@ export class Recipe extends BaseEntity {
 
 	@OneToMany(() => RecipeTag, ({ recipe }) => recipe, { cascade: true })
 	recipeTags: RecipeTag[]
+
+	@DeleteDateColumn()
+	deletedAt: Date
 }
