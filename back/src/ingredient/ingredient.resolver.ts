@@ -7,6 +7,7 @@ import { IngredientService } from './ingredient.service'
 import { UpdateIngredientInput } from './dto/update-ingredient.input'
 import { UseGuards } from '@nestjs/common'
 import { IsAdminGuard } from 'src/user/guards/is-admin.guard'
+import { IsPublic } from 'src/auth/guards/is-public.guard'
 
 @Resolver(() => Ingredient)
 export class IngredientResolver {
@@ -15,6 +16,12 @@ export class IngredientResolver {
 		private readonly ingredientRepository: Repository<Ingredient>,
 		private readonly ingredientService: IngredientService,
 	) {}
+
+	@Mutation(() => Ingredient)
+	@UseGuards(IsAdminGuard)
+	removeIngredient(@Args('id') id: string): Promise<Ingredient> {
+		return this.ingredientService.removeIngredient(id)
+	}
 
 	@Mutation(() => Ingredient)
 	@UseGuards(IsAdminGuard)
@@ -32,6 +39,7 @@ export class IngredientResolver {
 	}
 
 	@Query(() => [Ingredient])
+	@IsPublic()
 	ingredients(): Promise<Ingredient[]> {
 		return this.ingredientRepository.find()
 	}
