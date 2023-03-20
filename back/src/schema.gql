@@ -8,6 +8,24 @@ input CreateIngredientInput {
   previewPicture: String!
 }
 
+input CreateRecipeIngredientInput {
+  id: ID!
+  mesureUnit: MesureUnit!
+  quantity: Int!
+}
+
+input CreateRecipeInput {
+  cookingTime: Time!
+  difficulty: Difficulty!
+  ingredients: [CreateRecipeIngredientInput!]!
+  portion: Int!
+  previewPicture: String!
+  steps: [String!]!
+  tagIds: [String!]!
+  title: String!
+  tutorialVideo: String!
+}
+
 input CreateUserInput {
   email: String!
   firstName: String!
@@ -35,11 +53,12 @@ input FilterInput {
 
 type Ingredient {
   id: ID!
+  mesureUnits: [MesureUnit!]!
   name: String!
   previewPicture: String!
 }
 
-type IngredientOuput {
+type IngredientOutput {
   ingredientId: ID!
   mesureUnit: MesureUnit!
   name: String!
@@ -77,9 +96,12 @@ type Mutation {
   banUser(id: String!): User!
   confirmEmail(email: String!, emailCode: Float!): LoginResponse!
   createIngredient(input: CreateIngredientInput!): Ingredient!
+  createRecipe(input: CreateRecipeInput!): RecipeOutput!
   login(loginUserInput: LoginUserInput!): LoginResponse!
   refreshTokens(refreshToken: String!): LoginResponse!
   register(createUserInput: CreateUserInput!): User!
+  removeIngredient(id: String!): Ingredient!
+  removeTag(id: String!): Tag!
   resetPassword(email: String!, emailCode: Float!, newPassword: String!): LoginResponse!
   sendRegisterConfirmation(email: String!): User!
   sendResetPasswordCode(email: String!): String!
@@ -107,7 +129,7 @@ type Query {
 }
 
 type Recipe {
-  cookingTime: String!
+  cookingTime: Time!
   creationDate: DateTime!
   creator: User!
   difficulty: Difficulty!
@@ -129,15 +151,16 @@ enum RecipeOrderName {
 }
 
 type RecipeOutput {
-  cookingTime: String!
+  cookingTime: Time!
   creationDate: DateTime!
   creator: User!
   difficulty: Difficulty!
   id: ID!
-  ingredients: [IngredientOuput!]!
+  ingredients: [IngredientOutput!]!
   portion: Int!
   previewPicture: String!
   steps: [String!]!
+  tags: [TagOutput!]!
   title: String!
   tutorialVideo: String!
 }
@@ -158,6 +181,17 @@ type Tag {
   name: String!
   recipeTags: [RecipeTag!]!
 }
+
+type TagOutput {
+  name: String!
+  recipeTagId: ID!
+  tagId: ID!
+}
+
+"""
+A time string at UTC, such as 10:15:30Z, compliant with the `full-time` format outlined in section 5.6 of the RFC 3339profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar Time
 
 input UpdateIngredientInput {
   mesureUnits: [MesureUnit!]
