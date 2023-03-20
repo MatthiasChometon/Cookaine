@@ -97,6 +97,7 @@ type Mutation {
   confirmEmail(email: String!, emailCode: Float!): LoginResponse!
   createIngredient(input: CreateIngredientInput!): Ingredient!
   createRecipe(input: CreateRecipeInput!): RecipeOutput!
+  deleteRecipe(id: String!): Recipe!
   login(loginUserInput: LoginUserInput!): LoginResponse!
   refreshTokens(refreshToken: String!): LoginResponse!
   register(createUserInput: CreateUserInput!): User!
@@ -122,6 +123,7 @@ input PaginationInput {
 type Query {
   account: User!
   ingredients: [Ingredient!]!
+  recipe(id: String!): RecipeOutput!
   recipes(options: RecipeSearchInput!): [RecipeOutput!]!
   tags: [Tag!]!
   user(id: String!): User!
