@@ -30,6 +30,16 @@ export class RecipeService {
 		private readonly tagService: TagService,
 	) {}
 
+	async deleteRecipe(id: string, user: User): Promise<Recipe> {
+		const recipe = await this.recipeRepository.findOneOrFail({
+			where: { id },
+			relations: ['creator'],
+		})
+		if (!user.isCreatorOfRecipe(recipe.creator.id) && !user.isAdmin())
+			throw new UnauthorizedException('You are not allowed to delete this recipe')
+		await this.recipeRepository.softDelete(id)
+		return recipe
+	}
 	async search(input: RecipeSearchInput, userId?: string): Promise<RecipeOutput[]> {
 		const { orderBy, filterBy } = input
 		const { pagination, search, isFromConnectedUser } = filterBy
