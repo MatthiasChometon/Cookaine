@@ -1,31 +1,19 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, UnauthorizedException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Recipe } from './entities/recipe.entity'
-import { Repository } from 'typeorm'
+import { Repository, SelectQueryBuilder } from 'typeorm'
 import { RecipeSearchInput } from './dto/recipe-search.input'
 import { RecipeOutput } from './dto/recipe.output'
 import { IngredientService } from 'src/ingredient/ingredient.service'
 import { TagService } from 'src/tag/tag.service'
 import { CreateRecipeInput } from './dto/create-recipe.input'
 import { User } from 'src/user/methods/user.methods'
-import { Tag } from 'src/tag/entities/tag.entity'
-import { RecipeIngredient } from 'src/ingredient/entities/recipe-ingredient.entity'
-import { Ingredient } from 'src/ingredient/entities/ingredient.entity'
-import { RecipeTag } from 'src/tag/entities/recipe-tag.entity'
 
 @Injectable()
 export class RecipeService {
 	constructor(
 		@InjectRepository(Recipe)
 		private readonly recipeRepository: Repository<Recipe>,
-		@InjectRepository(Tag)
-		private readonly tagRepository: Repository<Tag>,
-		@InjectRepository(RecipeIngredient)
-		private readonly recipeIngredientRepository: Repository<RecipeIngredient>,
-		@InjectRepository(Ingredient)
-		private readonly recipeTagRepository: Repository<RecipeTag>,
-		@InjectRepository(RecipeTag)
-		private readonly ingredientRepository: Repository<Ingredient>,
 		private readonly ingredientService: IngredientService,
 		private readonly tagService: TagService,
 	) {}
@@ -40,6 +28,23 @@ export class RecipeService {
 		await this.recipeRepository.softDelete(id)
 		return recipe
 	}
+
+	async details(id: string): Promise<RecipeOutput> {
+		const query = this.recipeRepository.createQueryBuilder('recipe').where('recipe.id = :id', { id })
+		const recipe = await this.addTagsAndIngredientsToQuery(query).getOneOrFail()
+		return this.convertToRecipeOutput(recipe)
+	}
+
+	addTagsAndIngredientsToQuery(query: SelectQueryBuilder<Recipe>): SelectQueryBuilder<Recipe> {
+		return query
+			.leftJoinAndSelect('recipe.recipeIngredients', 'recipeIngredients')
+			.leftJoinAndSelect('recipeIngredients.ingredient', 'ingredient')
+			.leftJoinAndSelect('recipe.recipeTags', 'recipeTags')
+			.leftJoinAndSelect('recipeTags.tag', 'tag')
+			.where('recipeIngredients.id IS NOT NULL')
+			.where('recipeTags.id IS NOT NULL')
+	}
+
 	async search(input: RecipeSearchInput, userId?: string): Promise<RecipeOutput[]> {
 		const { orderBy, filterBy } = input
 		const { pagination, search, isFromConnectedUser } = filterBy
@@ -48,12 +53,8 @@ export class RecipeService {
 		let query = this.recipeRepository
 			.createQueryBuilder('recipe')
 			.leftJoinAndSelect('recipe.creator', 'creator')
-			.leftJoinAndSelect('recipe.recipeIngredients', 'recipeIngredients')
-			.leftJoinAndSelect('recipeIngredients.ingredient', 'ingredient')
-			.leftJoinAndSelect('recipe.recipeTags', 'recipeTags')
-			.leftJoinAndSelect('recipeTags.tag', 'tag')
-			.where('recipeIngredients.id IS NOT NULL')
-			.where('recipeTags.id IS NOT NULL')
+
+		query = this.addTagsAndIngredientsToQuery(query)
 
 		if (isFromConnectedUser) query = query.where('creator.id = :id', { id: userId })
 		if (filterBy.userId) query = query.where('creator.id = :id', { id: filterBy.userId })

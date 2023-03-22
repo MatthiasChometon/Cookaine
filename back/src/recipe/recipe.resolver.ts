@@ -21,6 +21,12 @@ export class RecipeResolver {
 		return this.recipeService.search(options, id)
 	}
 
+	@Query(() => RecipeOutput)
+	@IsPublic()
+	recipe(@Args('id') id: string): Promise<RecipeOutput> {
+		return this.recipeService.details(id)
+	}
+
 	@Mutation(() => RecipeOutput)
 	createRecipe(
 		@Args('input') input: CreateRecipeInput,
