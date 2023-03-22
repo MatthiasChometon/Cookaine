@@ -14,16 +14,19 @@ export class AuthResolver {
 	constructor(private authService: AuthService, private tokenService: TokenService) {}
 
 	@Mutation(() => User)
+	@IsPublic()
 	register(@Args('createUserInput') input: CreateUserInput): Promise<User> {
 		return this.authService.register(input)
 	}
 
 	@Mutation(() => User)
+	@IsPublic()
 	sendRegisterConfirmation(@Args('email') email: string): Promise<User> {
 		return this.authService.sendRegisterConfirmation(email)
 	}
 
 	@Mutation(() => LoginResponse)
+	@IsPublic()
 	confirmEmail(
 		@Args('emailCode') emailCode: number,
 		@Args('email') email: string,
@@ -31,9 +34,9 @@ export class AuthResolver {
 		return this.authService.confirmEmail(emailCode, email)
 	}
 
+	@Mutation(() => LoginResponse)
 	@UseGuards(GqlAuthGuard)
 	@IsPublic()
-	@Mutation(() => LoginResponse)
 	login(
 		@Args('loginUserInput') _loginUserInput: LoginUserInput,
 		@Context() context,
@@ -42,6 +45,7 @@ export class AuthResolver {
 	}
 
 	@Mutation(() => LoginResponse)
+	@IsPublic()
 	refreshTokens(@Args('refreshToken') refreshToken: string): Promise<LoginResponse> {
 		return this.tokenService.refresh(refreshToken)
 	}

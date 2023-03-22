@@ -38,8 +38,6 @@ export class AuthService {
 	}
 
 	async register(createUserInput: CreateUserInput): Promise<User> {
-		const newUser = this.userRepository.create({ email: createUserInput.email })
-		this.userRepository.save(newUser)
 		const user = await this.userService.insertOneAndGet(createUserInput)
 		await this.emailService.sendRegisterConfirmation(user)
 		return user
