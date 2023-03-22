@@ -1,16 +1,22 @@
 import { Resolver, Mutation, Args, Context, Query } from '@nestjs/graphql'
 import { UserService } from './user.service'
 import { UseGuards } from '@nestjs/common'
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard'
 import { UpdateUserInput } from './dto/update-user.input'
 import { User } from './methods/user.methods'
+import { UserStatus } from './enums/user-status.enum'
+import { InjectRepository } from '@nestjs/typeorm'
+import { Repository } from 'typeorm'
+import { IsAdminGuard } from './guards/is-admin.guard'
 
-@Resolver(() => User)
+@Resolver(User)
 export class UserResolver {
-	constructor(private readonly userService: UserService) {}
+	constructor(
+		private readonly userService: UserService,
+		@InjectRepository(User)
+		private userRepository: Repository<User>,
+	) {}
 
 	@Mutation(() => User)
-	@UseGuards(JwtAuthGuard)
 	updateAccount(
 		@Args('updateUserInput') updateUserInput: UpdateUserInput,
 		@Context() context,
@@ -19,8 +25,24 @@ export class UserResolver {
 	}
 
 	@Query(() => User)
-	@UseGuards(JwtAuthGuard)
 	account(@Context() context): Promise<User> {
 		return context.req.user
+	}
+
+	@Mutation(() => User)
+	banUser(@Args('id') id: string): Promise<User> {
+		return this.userService.updateAndGet(id, { status: UserStatus.isBanned })
+	}
+
+	@Query(() => [User])
+	@UseGuards(IsAdminGuard)
+	users(): Promise<User[]> {
+		return this.userRepository.find()
+	}
+
+	@Query(() => User)
+	@UseGuards(IsAdminGuard)
+	user(@Args('id') id: string): Promise<User> {
+		return this.userRepository.findOneByOrFail({ id })
 	}
 }
