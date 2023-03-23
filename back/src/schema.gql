@@ -94,7 +94,7 @@ enum MesureUnit {
 
 type Mutation {
   banUser(id: String!): User!
-  confirmEmail(email: String!, emailCode: Float!): LoginResponse!
+  confirmEmail(email: String!, emailCode: Int!): LoginResponse!
   createIngredient(input: CreateIngredientInput!): Ingredient!
   createRecipe(input: CreateRecipeInput!): RecipeOutput!
   deleteRecipe(id: String!): Recipe!
