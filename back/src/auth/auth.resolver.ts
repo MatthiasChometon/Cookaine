@@ -1,5 +1,5 @@
 import { UseGuards } from '@nestjs/common'
-import { Args, Context, Mutation, Resolver } from '@nestjs/graphql'
+import { Args, Context, Int, Mutation, Resolver } from '@nestjs/graphql'
 import { User } from 'src/user/methods/user.methods'
 import { CreateUserInput } from '../user/dto/create-user.input'
 import { AuthService } from './auth.service'
@@ -7,45 +7,46 @@ import { LoginResponse } from './dto/login-response'
 import { LoginUserInput } from './dto/login-user.input'
 import { GqlAuthGuard } from './guards/gql-auth-guard'
 import { TokenService } from './token.service'
+import { IsPublic } from './guards/is-public.guard'
 
 @Resolver()
 export class AuthResolver {
-	constructor(
-		private authService: AuthService,
-		private tokenService: TokenService,
-	) {}
+	constructor(private authService: AuthService, private tokenService: TokenService) {}
 
 	@Mutation(() => User)
+	@IsPublic()
 	register(@Args('createUserInput') input: CreateUserInput): Promise<User> {
 		return this.authService.register(input)
 	}
 
 	@Mutation(() => User)
+	@IsPublic()
 	sendRegisterConfirmation(@Args('email') email: string): Promise<User> {
 		return this.authService.sendRegisterConfirmation(email)
 	}
 
 	@Mutation(() => LoginResponse)
+	@IsPublic()
 	confirmEmail(
-		@Args('emailCode') emailCode: number,
+		@Args({ type: () => Int, name: 'emailCode' }) emailCode: number,
 		@Args('email') email: string,
 	): Promise<LoginResponse> {
 		return this.authService.confirmEmail(emailCode, email)
 	}
 
-	@UseGuards(GqlAuthGuard)
 	@Mutation(() => LoginResponse)
+	@UseGuards(GqlAuthGuard)
+	@IsPublic()
 	login(
-		@Args('loginUserInput') loginUserInput: LoginUserInput,
+		@Args('loginUserInput') _loginUserInput: LoginUserInput,
 		@Context() context,
 	): Promise<LoginResponse> {
 		return this.authService.login(context.user)
 	}
 
 	@Mutation(() => LoginResponse)
-	refreshTokens(
-		@Args('refreshToken') refreshToken: string,
-	): Promise<LoginResponse> {
+	@IsPublic()
+	refreshTokens(@Args('refreshToken') refreshToken: string): Promise<LoginResponse> {
 		return this.tokenService.refresh(refreshToken)
 	}
 

@@ -69,7 +69,7 @@ dependencies:
   graphql: 16.6.0
   graphql-tag: 2.12.6_graphql@16.6.0
   nprogress: 0.2.0
-  pinia: 2.0.33_typescript@4.9.5+vue@3.2.47
+  pinia: 2.0.33_hmuptsblhheur2tugfgucj7gc4
   quasar: 2.11.7
   vue: 3.2.47
   vue-demi: 0.12.5_vue@3.2.47
@@ -1913,8 +1913,9 @@ packages:
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
     dev: true
 
-  /@intlify/bundle-utils/5.4.0_vue-i18n@9.2.2:
-    resolution: {integrity: sha512-oJbibbP5djdQYTv0cQC4PYRHPpS5nF/KZ7MWM1/yhdsGzjvCekJHWk25MCQIIOrfQ+aw5tKi2t66KpYEUki/tw==}
+
+  /@intlify/bundle-utils/5.2.0_vue-i18n@9.2.2:
+    resolution: {integrity: sha512-rIfoNUTBoZK6IfaEeuoYMQZSuAXhPyZoy+UsdZj+V4eM632ynN1bGt5ttkpGO8xe0c+esfYslgJxBz//bdu4qg==}
     engines: {node: '>= 12'}
     peerDependencies:
       petite-vue-i18n: '*'
@@ -1928,7 +1929,6 @@ packages:
       '@intlify/message-compiler': 9.3.0-beta.17
       '@intlify/shared': 9.3.0-beta.17
       acorn: 8.8.2
-      escodegen: 2.0.0
       estree-walker: 2.0.2
       jsonc-eslint-parser: 1.4.1
       magic-string: 0.30.0
@@ -1989,7 +1989,7 @@ packages:
       vue-i18n:
         optional: true
     dependencies:
-      '@intlify/bundle-utils': 5.4.0_vue-i18n@9.2.2
+      '@intlify/bundle-utils': 5.2.0_vue-i18n@9.2.2
       '@intlify/shared': 9.3.0-beta.17
       '@rollup/pluginutils': 4.2.1
       debug: 4.3.4
@@ -7525,7 +7525,7 @@ packages:
       eslint-scope: 7.1.1
       eslint-utils: 3.0.0_eslint@8.4.1
       eslint-visitor-keys: 3.3.0
-      espree: 9.2.0
+      espree: 9.5.0
       esquery: 1.5.0
       esutils: 2.0.3
       fast-deep-equal: 3.1.3
@@ -11069,7 +11069,7 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /pinia/2.0.33_typescript@4.9.5+vue@3.2.47:
+  /pinia/2.0.33_hmuptsblhheur2tugfgucj7gc4:
     resolution: {integrity: sha512-HOj1yVV2itw6rNIrR2f7+MirGNxhORjrULL8GWgRwXsGSvEqIQ+SE0MYt6cwtpegzCda3i+rVTZM+AM7CG+kRg==}
     peerDependencies:
       '@vue/composition-api': ^1.4.0

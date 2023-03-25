@@ -8,6 +8,6 @@ import { RecipeTag } from './entities/recipe-tag.entity'
 @Module({
 	imports: [TypeOrmModule.forFeature([Tag, RecipeTag])],
 	providers: [TagResolver, TagService],
-	exports: [TypeOrmModule],
+	exports: [TypeOrmModule, TagService],
 })
 export class TagModule {}

@@ -22,7 +22,6 @@ export class AuthService {
 
 	async validateUser(email: string, password: string): Promise<User | null> {
 		const user = await this.userRepository.findOneByOrFail({ email })
-
 		if (!(await user.hasValidPassword(password)) || !user.isActive())
 			throw new UnauthorizedException()
 		return user
@@ -39,8 +38,6 @@ export class AuthService {
 	}
 
 	async register(createUserInput: CreateUserInput): Promise<User> {
-		const newUser = this.userRepository.create({ email: createUserInput.email })
-		this.userRepository.save(newUser)
 		const user = await this.userService.insertOneAndGet(createUserInput)
 		await this.emailService.sendRegisterConfirmation(user)
 		return user
@@ -87,11 +84,7 @@ export class AuthService {
 		}
 	}
 
-	async resetPassword(
-		email: string,
-		emailCode: number,
-		password: string,
-	): Promise<LoginResponse> {
+	async resetPassword(email: string, emailCode: number, password: string): Promise<LoginResponse> {
 		const user = await this.userRepository.findOneByOrFail({
 			email,
 			emailCode,

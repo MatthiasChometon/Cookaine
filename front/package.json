@@ -6,7 +6,7 @@
 	},
 	"scripts": {
 		"build": "vite build",
-		"dev": "pnpm i && vite --port 4000",
+		"dev": "vite --port 4000",
 		"lint": "eslint .",
 		"preview": "vite preview",
 		"preview-https": "serve dist",
