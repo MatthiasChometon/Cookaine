@@ -1,5 +1,5 @@
 import { UseGuards } from '@nestjs/common'
-import { Args, Context, Mutation, Resolver } from '@nestjs/graphql'
+import { Args, Context, Int, Mutation, Resolver } from '@nestjs/graphql'
 import { User } from 'src/user/methods/user.methods'
 import { CreateUserInput } from '../user/dto/create-user.input'
 import { AuthService } from './auth.service'
@@ -28,7 +28,7 @@ export class AuthResolver {
 	@Mutation(() => LoginResponse)
 	@IsPublic()
 	confirmEmail(
-		@Args('emailCode') emailCode: number,
+		@Args({ type: () => Int, name: 'emailCode' }) emailCode: number,
 		@Args('email') email: string,
 	): Promise<LoginResponse> {
 		return this.authService.confirmEmail(emailCode, email)

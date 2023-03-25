@@ -4,10 +4,17 @@
 import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
-	export interface GlobalComponents {
-		RouterLink: typeof import('vue-router')['RouterLink']
-		RouterView: typeof import('vue-router')['RouterView']
-	}
+  export interface GlobalComponents {
+    EmailInput: typeof import('./common/components/forms/EmailInput.vue')['default']
+    LoginForm: typeof import('./authentication/components/login/LoginForm.vue')['default']
+    LoginLink: typeof import('./authentication/components/login/LoginLink.vue')['default']
+    LogoutButton: typeof import('./authentication/components/LogoutButton.vue')['default']
+    PasswordConfirmationInput: typeof import('./common/components/forms/PasswordConfirmationInput.vue')['default']
+    RegisterForm: typeof import('./authentication/components/register/RegisterForm.vue')['default']
+    RegisterLink: typeof import('./authentication/components/register/RegisterLink.vue')['default']
+    RouterLink: typeof import('vue-router')['RouterLink']
+    RouterView: typeof import('vue-router')['RouterView']
+  }
 }
 
 export {}
