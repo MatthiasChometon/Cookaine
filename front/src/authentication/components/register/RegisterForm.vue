@@ -30,7 +30,7 @@ onDone((result) => {
 
 <template>
 	<div class="full-height flex justify-center items-center column no-wrap">
-		<div class="flex justify-center text-h5 q-pb-md text-primary">Connexion</div>
+		<div class="flex justify-center text-h5 q-pb-md text-primary">Inscription</div>
 		<q-form class="q-gutter-md q-pt-md" @submit="register({ input: newUser })">
 			<EmailInput
 				:email="newUser.email"

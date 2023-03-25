@@ -1,13 +1,14 @@
 <script setup lang="ts">
+import { useConnectedUser } from '~/authentication/stores/connected'
+
 const props = defineProps<{
-	class: string
+    class: string
 }>()
+const { logout } = useConnectedUser()
 </script>
 
 <template>
-	<div class="divConnexion">
-		<router-link :class="props.class" style="font-size: 18px" to="/">
-			Se déconnecter
-		</router-link>
-	</div>
+    <router-link :class="props.class" style="font-size: 18px" to="/" @click="logout">
+        Se déconnecter
+    </router-link>
 </template>

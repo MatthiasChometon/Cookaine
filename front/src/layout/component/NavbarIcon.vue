@@ -5,12 +5,6 @@ const props = defineProps<{
 </script>
 
 <template>
-	<div>
-		<q-img
-			:src="props.imgLink"
-			spinner-color="white"
-			style="width: 60px"
-			fit="contain"
-		/>
-	</div>
+	<router-link to="/">
+		<q-img :src="props.imgLink" spinner-color="white" style="width: 60px" fit="contain" /></router-link>
 </template>

@@ -7,7 +7,7 @@ import Navbar from '~/layout/component/Navbar.vue'
 	<q-layout view="lhr lpr lfr">
 		<Navbar />
 		<q-page-container>
-			<RouterView class="q-py-lg" />
+			<RouterView />
 		</q-page-container>
 		<Footer />
 	</q-layout>

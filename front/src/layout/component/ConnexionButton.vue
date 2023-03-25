@@ -6,10 +6,10 @@ const props = defineProps<{
 
 <template>
 	<div class="divConnexion">
-		<router-link :class="props.class" style="font-size: 18px" to="/">
+		<router-link :class="props.class" style="font-size: 18px" to="/login">
 			Se connecter
 		</router-link>
-		<router-link :class="props.class" style="font-size: 18px" to="/">
+		<router-link :class="props.class" style="font-size: 18px" to="/register">
 			S’inscrire
 		</router-link>
 	</div>

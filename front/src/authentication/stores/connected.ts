@@ -27,8 +27,8 @@ export const useConnectedUser = defineStore('connectedUser', () => {
 		}
 		$patch({ connectedUser: visitor })
 		localStorage.clear()
-		router.replace('/product/list')
-		const message = t('account.onLogout')
+		router.replace('/')
+		const message = t('Vous êtes déconnecté')
 		$q.notify({ message, color: 'info' })
 	}
 
