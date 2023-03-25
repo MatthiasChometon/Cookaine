@@ -24,6 +24,7 @@
 		"graphql": "^16.6.0",
 		"graphql-tag": "^2.12.6",
 		"nprogress": "^0.2.0",
+		"pinia": "^2.0.33",
 		"quasar": "^2.11.5",
 		"vue": "^3.2.45",
 		"vue-demi": "^0.12.5",
