@@ -1913,8 +1913,8 @@ packages:
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
     dev: true
 
-  /@intlify/bundle-utils/5.2.0_vue-i18n@9.2.2:
-    resolution: {integrity: sha512-rIfoNUTBoZK6IfaEeuoYMQZSuAXhPyZoy+UsdZj+V4eM632ynN1bGt5ttkpGO8xe0c+esfYslgJxBz//bdu4qg==}
+  /@intlify/bundle-utils/5.4.0_vue-i18n@9.2.2:
+    resolution: {integrity: sha512-oJbibbP5djdQYTv0cQC4PYRHPpS5nF/KZ7MWM1/yhdsGzjvCekJHWk25MCQIIOrfQ+aw5tKi2t66KpYEUki/tw==}
     engines: {node: '>= 12'}
     peerDependencies:
       petite-vue-i18n: '*'
@@ -1928,8 +1928,10 @@ packages:
       '@intlify/message-compiler': 9.3.0-beta.17
       '@intlify/shared': 9.3.0-beta.17
       acorn: 8.8.2
+      escodegen: 2.0.0
       estree-walker: 2.0.2
       jsonc-eslint-parser: 1.4.1
+      magic-string: 0.30.0
       source-map: 0.6.1
       vue-i18n: 9.2.2_vue@3.2.47
       yaml-eslint-parser: 0.3.2
@@ -1987,7 +1989,7 @@ packages:
       vue-i18n:
         optional: true
     dependencies:
-      '@intlify/bundle-utils': 5.2.0_vue-i18n@9.2.2
+      '@intlify/bundle-utils': 5.4.0_vue-i18n@9.2.2
       '@intlify/shared': 9.3.0-beta.17
       '@rollup/pluginutils': 4.2.1
       debug: 4.3.4
@@ -9970,6 +9972,13 @@ packages:
 
   /magic-string/0.27.0:
     resolution: {integrity: sha512-8UnnX2PeRAPZuN12svgR9j7M1uWMovg/CEnIwIG0LFkXSJJe4PdfUGiTGl8V9bsBHFUtfVINcSyYxd7q+kx9fA==}
+    engines: {node: '>=12'}
+    dependencies:
+      '@jridgewell/sourcemap-codec': 1.4.14
+    dev: true
+
+  /magic-string/0.30.0:
+    resolution: {integrity: sha512-LA+31JYDJLs82r2ScLrlz1GjSgu66ZV518eyWT+S8VhyQn/JL0u9MeBOvQMGYiPk1DBiSN9DDMOcXvigJZaViQ==}
     engines: {node: '>=12'}
     dependencies:
       '@jridgewell/sourcemap-codec': 1.4.14

@@ -1,6 +1,7 @@
-import { defineStore } from 'pinia'
-import { ConnectedUser } from '../types/ConnectedUser'
-import { LoginResponse } from '../types/LoginResponse'
+import { useQuasar } from 'quasar'
+import { acceptHMRUpdate, defineStore } from 'pinia'
+import type { ConnectedUser } from '~/types/user/ConnectedUser'
+import type { LoginResponse } from '~/types/user/LoginResponse'
 
 export const useConnectedUser = defineStore('connectedUser', () => {
 	const { $patch } = useConnectedUser()
@@ -27,8 +28,8 @@ export const useConnectedUser = defineStore('connectedUser', () => {
 		}
 		$patch({ connectedUser: visitor })
 		localStorage.clear()
-		router.replace('/')
-		const message = t('Vous êtes déconnecté')
+		router.replace('/product/list')
+		const message = t('account.onLogout')
 		$q.notify({ message, color: 'info' })
 	}
 
@@ -43,3 +44,6 @@ export const useConnectedUser = defineStore('connectedUser', () => {
 		logout,
 	}
 })
+
+if (import.meta.hot)
+	import.meta.hot.accept(acceptHMRUpdate(useConnectedUser, import.meta.hot))
