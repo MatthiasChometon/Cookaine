@@ -15,7 +15,10 @@ export const useNotification = defineStore('notification', () => {
 		$q.notify({ color, textColor: 'white', message })
 	}
 
-	return { sendNotification }
+	function sendError(message: string) {
+		$q.notify({ color: 'warning', textColor: 'white', message })
+	}
+	return { sendNotification, sendError }
 })
 
 if (import.meta.hot)
