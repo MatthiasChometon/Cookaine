@@ -18,7 +18,7 @@ export class FilterInput {
 	pagination?: PaginationInput
 
 	@Field(() => GraphQLLocalTime, { nullable: true })
-	maximumCookingTime?: number
+	maximumCookingTime?: string
 
 	@Field(() => [Difficulty], { nullable: true })
 	difficultiesSelected?: Difficulty[]
