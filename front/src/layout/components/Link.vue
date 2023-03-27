@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Link } from '~/types/Link'
+import type { Link } from '../types/Link'
 
 const props = defineProps<{
 	link: Link

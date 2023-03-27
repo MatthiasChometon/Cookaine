@@ -7,6 +7,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     BurgerMenuButton: typeof import('./layout/components/BurgerMenuButton.vue')['default']
     BurgerMenuLinks: typeof import('./layout/components/BurgerMenuLinks.vue')['default']
+    CardRecipe: typeof import('./common/components/forms/CardRecipe.vue')['default']
     CloseDrawer: typeof import('./layout/components/CloseDrawer.vue')['default']
     ConnexionButton: typeof import('./layout/components/ConnexionButton.vue')['default']
     DeconnexionButton: typeof import('./layout/components/DeconnexionButton.vue')['default']

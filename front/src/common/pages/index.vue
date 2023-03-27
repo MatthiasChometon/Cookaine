@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { DifficultyTranslation } from '../enums/difficultyTranslation'
 import { useHomeRecipesQuery } from '../generated/graphql'
+
 const { sendError } = useNotification()
 
 const { result, loading, onError, error } = useHomeRecipesQuery({
@@ -18,14 +20,14 @@ onError(() => sendError('Une erreur est survenue'))
 	<div>
 		<q-img src="../assets/fond.jpg"> </q-img>
 		<h4 class="text-center">Nos dernières recettes</h4>
-		<div v-if="!loading && !error">
-			Les infos des recettes
+		<div v-if="!loading && !error" class="flex justify-around">
 			<div v-for="recipe in result?.recipes" :key="recipe.id">
-				{{ recipe.id }}
-				{{ recipe.title }}
-				{{ recipe.difficulty }}
-				{{ recipe.previewPicture }}
-				{{ recipe.cookingTime }}
+				<CardRecipe
+					:title="recipe.title"
+					:img="recipe.previewPicture"
+					:difficulty="DifficultyTranslation[recipe.difficulty]"
+					:cooking-time="recipe.cookingTime"
+				></CardRecipe>
 			</div>
 		</div>
 	</div>
