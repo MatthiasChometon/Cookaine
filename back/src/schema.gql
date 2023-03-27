@@ -68,6 +68,11 @@ type IngredientOutput {
   recipeIngredientId: ID!
 }
 
+"""
+A local time string (i.e., with no associated timezone) in 24-hr `HH:mm[:ss[.SSS]]` format, e.g. `14:25` or `14:25:06` or `14:25:06.123`.
+"""
+scalar LocalTime
+
 type LoginResponse {
   accessToken: String!
   refreshToken: String!
@@ -131,7 +136,7 @@ type Query {
 }
 
 type Recipe {
-  cookingTime: Time!
+  cookingTime: LocalTime!
   creationDate: DateTime!
   creator: User!
   difficulty: Difficulty!
@@ -153,7 +158,7 @@ enum RecipeOrderName {
 }
 
 type RecipeOutput {
-  cookingTime: Time!
+  cookingTime: LocalTime!
   creationDate: DateTime!
   creator: User!
   difficulty: Difficulty!
