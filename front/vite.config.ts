@@ -52,6 +52,21 @@ export default defineConfig({
 				'quasar',
 			],
 			dts: 'src/auto-imports.d.ts',
+			dirs: [
+				'src/**/composables/**/*',
+				'src/**/composables/*',
+				'src/**/composables/**/**/*',
+				'src/**/enums/**/*',
+				'src/**/enums/*',
+				'src/**/enums/**/**/*',
+				'src/**/types/**/*',
+				'src/**/types/*',
+				'src/**/types/**/**/*',
+				'src/**/stores/**/*',
+				'src/**/stores/*',
+				'src/**/stores/**/**/*',
+				'src/common/generated/*',
+			],
 		}),
 
 		// https://github.com/antfu/unplugin-vue-components
