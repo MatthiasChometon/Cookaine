@@ -1,12 +1,4 @@
 <script setup lang="ts">
-import CloseDrawer from './CloseDrawer.vue'
-import BurgerMenuLinks from './BurgerMenuLinks.vue'
-import NavbarIcon from './NavbarIcon.vue'
-import NavbarSearch from './NavbarSearch.vue'
-import ConnexionButton from './ConnexionButton.vue'
-import DeconnexionButton from './DeconnexionButton.vue'
-import { useBurgerMenuButton } from '~/stores/navbar/burgerMenu'
-import { useUserRole } from '~/composables/useUserRole'
 const isOpen = useBurgerMenuButton()
 const { isVisitor } = useUserRole()
 </script>

@@ -1,13 +1,13 @@
 import type { CreateGlobalStateReturn, RemovableRef } from '@vueuse/core'
 import { createGlobalState, useStorage } from '@vueuse/core'
 import type { Account } from '~/authentication/types/Account'
-import { UserRoles } from '../enums/UserRoles'
 
-export const useAccount: CreateGlobalStateReturn<RemovableRef<Account>> = createGlobalState(() =>
+export const useAccount: CreateGlobalStateReturn<RemovableRef<Account>> =
+	createGlobalState(() =>
 		useStorage('useAccount', {
-			email: "",
-			id: "",
-			role: UserRoles.user,
+			email: '',
+			id: '',
+			role: UserRoles,
 			__typename: 'User',
 		}),
 	)

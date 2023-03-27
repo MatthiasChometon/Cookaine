@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import Link from './Link.vue'
-import { useLinks } from '~/composables/useLinks'
 const { allLinks } = useLinks()
 </script>
 
