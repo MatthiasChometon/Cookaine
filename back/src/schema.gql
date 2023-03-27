@@ -45,7 +45,9 @@ enum Difficulty {
 }
 
 input FilterInput {
+  difficultiesSelected: [Difficulty!]
   isFromConnectedUser: Boolean
+  maximumCookingTime: LocalTime
   pagination: PaginationInput
   search: String
   userId: String
