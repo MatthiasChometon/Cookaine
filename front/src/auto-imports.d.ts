@@ -19,7 +19,6 @@ declare global {
   const HomeRecipesDocument: typeof import('./common/generated/graphql')['HomeRecipesDocument']
   const MesureUnit: typeof import('./common/generated/graphql')['MesureUnit']
   const MesureUnitTranslation: typeof import('./common/enums/mesureUnitTranslation')['MesureUnitTranslation']
-  const OptionsForRecipeListFilterDocument: typeof import('./common/generated/graphql')['OptionsForRecipeListFilterDocument']
   const OrderDirection: typeof import('./common/generated/graphql')['OrderDirection']
   const RecipeFiltersDocument: typeof import('./common/generated/graphql')['RecipeFiltersDocument']
   const RecipeOrderName: typeof import('./common/generated/graphql')['RecipeOrderName']

@@ -4,6 +4,7 @@ import { Repository } from 'typeorm'
 import { Tag } from './entities/tag.entity'
 import { RecipeTag } from './entities/recipe-tag.entity'
 import { TagOutput } from './dto/tag.output'
+import { Recipe } from 'src/recipe/entities/recipe.entity'
 
 @Injectable()
 export class TagService {
@@ -38,13 +39,16 @@ export class TagService {
 		}
 	}
 
-	async createRecipeTags(tagIds: string[]): Promise<RecipeTag[]> {
+	async createRecipeTags(tagIds: string[], recipe: Recipe): Promise<RecipeTag[]> {
 		return await Promise.all(
 			tagIds.map(async (tagId) => {
 				const tag = await this.tagRepository.findOneByOrFail({ id: tagId })
-				return this.recipeTagRepository.create({
+				const recipeTag = this.recipeTagRepository.create({
 					tag,
+					recipe,
 				})
+				await this.recipeTagRepository.insert(recipeTag)
+				return recipeTag
 			}),
 		)
 	}
