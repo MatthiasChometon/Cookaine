@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Difficulty } from '~/common/generated/graphql'
+
 defineEmits(['update'])
 const difficulties = ref([])
 const difficultiesOptions = [
