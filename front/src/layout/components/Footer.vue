@@ -1,5 +1,4 @@
 <script setup lang="ts">
-const { t } = useI18n()
 const links: {
 	page: string
 	text: string
@@ -48,7 +47,7 @@ const links: {
 				replace
 				class="link"
 			>
-				{{ t(link.text) }}
+				{{ link.text }}
 			</router-link>
 		</div>
 	</q-footer>

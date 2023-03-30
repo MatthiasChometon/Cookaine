@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import {
-	Difficulty,
-	MesureUnit,
-	useCreateRecipeMutation,
-} from '~/common/generated/graphql'
+import type { GraphqlResult } from '~/common/types/graphql/GraphqlResult'
 
 const recipeForm = ref({
 	title: '',
@@ -101,14 +97,14 @@ const mesureUnitOptions = [
 		value: MesureUnit.Unity,
 	},
 ]
-const { result, loading, error, onError } = useRecipeFiltersQuery({})
+const { result, loading, error, onError } = useRecipeFiltersQuery()
 const { sendError, sendNotification } = useNotification()
 onError(() => sendError('Une erreur est survenue'))
 
 const { onDone, mutate: createRecipe } = useCreateRecipeMutation()
 const router = useRouter()
 
-onDone((result) => {
+onDone((result: GraphqlResult) => {
 	sendNotification(
 		result,
 		'Recette ajouter',

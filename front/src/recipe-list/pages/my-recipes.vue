@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useAdminRecipeFiltersQuery } from '~/common/generated/graphql'
+
 const defaultOptions = {
 	filterBy: {
 		pagination: { page: 1, itemsPerPage: 3 },
@@ -13,7 +15,7 @@ const {
 	loading: isLoadingFilters,
 	onError: onErrorFilters,
 	error: hasFiltersError,
-} = useRecipeFiltersQuery()
+} = useAdminRecipeFiltersQuery()
 const {
 	result: recipesResult,
 	loading: isLoadingRecipes,
@@ -24,7 +26,7 @@ const {
 })
 
 onErrorFilters(() => sendError('Impossible de charger les filtres'))
-onErrorRecipes(() => sendError('Impossible de charger les recettes'))
+onErrorRecipes(() => sendError('Impossible de charger vos recettes'))
 </script>
 
 <template>
