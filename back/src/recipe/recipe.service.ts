@@ -47,8 +47,16 @@ export class RecipeService {
 
 	async search(input: RecipeSearchInput, userId?: string): Promise<RecipeOutput[]> {
 		const { orderBy, filterBy } = input
-		const { pagination, search, isFromConnectedUser } = filterBy
-		const searchKeys = ['title', 'steps', 'ingredient.name']
+		const {
+			pagination,
+			search,
+			isFromConnectedUser,
+			maximumCookingTime,
+			difficulties,
+			tagNames,
+			ingredientNames,
+		} = filterBy
+		const searchKeys = ['title', 'steps', 'ingredient.name', 'tag.name']
 
 		let query = this.recipeRepository
 			.createQueryBuilder('recipe')
@@ -56,8 +64,15 @@ export class RecipeService {
 
 		query = this.addTagsAndIngredientsToQuery(query)
 
-		if (isFromConnectedUser) query = query.where('creator.id = :id', { id: userId })
-		if (filterBy.userId) query = query.where('creator.id = :id', { id: filterBy.userId })
+		if (maximumCookingTime)
+			query = query.andWhere('recipe.cookingTime <= :maximumCookingTime', { maximumCookingTime })
+		if (difficulties?.length > 0)
+			query = query.andWhere('recipe.difficulty IN (:...difficulties)', { difficulties })
+		if (ingredientNames?.length > 0)
+			query = query.andWhere('ingredient.name IN (:...ingredientNames)', { ingredientNames })
+		if (tagNames?.length > 0) query = query.andWhere('tag.name IN (:...tagNames)', { tagNames })
+		if (isFromConnectedUser) query = query.andWhere('creator.id = :id', { id: userId })
+		if (filterBy.userId) query = query.andWhere('creator.id = :id', { id: filterBy.userId })
 		if (search) {
 			searchKeys.forEach(
 				(key) =>

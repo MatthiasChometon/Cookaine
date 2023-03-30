@@ -7,7 +7,7 @@ const { isVisitor } = useUserRole()
 		<div class="flex">
 			<div class="flex justify-between">
 				<NavbarIcon
-					img-link="public/logoWhite.svg"
+					img-link="/logoWhite.svg"
 					class="q-pa-md q-pl-md flex justify-start content-center"
 				/>
 				<NavbarLinks class="flex justify-center content-center" />
