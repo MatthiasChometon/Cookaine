@@ -7,6 +7,7 @@ import { UpdateIngredientInput } from './dto/update-ingredient.input'
 import { IngredientOutput } from 'src/recipe/dto/ingredient.output'
 import { RecipeIngredient } from './entities/recipe-ingredient.entity'
 import { CreateRecipeIngredientInput } from 'src/recipe/dto/create-recipe-ingredient.input'
+import { Recipe } from 'src/recipe/entities/recipe.entity'
 
 @Injectable()
 export class IngredientService {
@@ -61,15 +62,19 @@ export class IngredientService {
 
 	async createRecipeIngredients(
 		ingredients: CreateRecipeIngredientInput[],
+		recipe: Recipe,
 	): Promise<RecipeIngredient[]> {
 		return await Promise.all(
 			ingredients.map(async ({ id, quantity, mesureUnit }) => {
 				const ingredient = await this.ingredientRepository.findOneByOrFail({ id })
-				return this.recipeIngredientRepository.create({
+				const recipeIngredient = this.recipeIngredientRepository.create({
 					quantity,
 					mesureUnit,
 					ingredient,
+					recipe,
 				})
+				await this.recipeIngredientRepository.insert(recipeIngredient)
+				return recipeIngredient
 			}),
 		)
 	}
