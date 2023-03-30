@@ -56,11 +56,13 @@ export enum Difficulty {
 }
 
 export type FilterInput = {
-  difficultiesSelected?: InputMaybe<Array<Difficulty>>;
+  difficulties?: InputMaybe<Array<Difficulty>>;
+  ingredientNames?: InputMaybe<Array<Scalars['String']>>;
   isFromConnectedUser?: InputMaybe<Scalars['Boolean']>;
   maximumCookingTime?: InputMaybe<Scalars['LocalTime']>;
   pagination?: InputMaybe<PaginationInput>;
   search?: InputMaybe<Scalars['String']>;
+  tagNames?: InputMaybe<Array<Scalars['String']>>;
   userId?: InputMaybe<Scalars['String']>;
 };
 
@@ -347,10 +349,17 @@ export type HomeRecipesQueryVariables = Exact<{
 
 export type HomeRecipesQuery = { __typename?: 'Query', recipes: Array<{ __typename?: 'RecipeOutput', id: string, title: string, difficulty: Difficulty, previewPicture: string, cookingTime: any }> };
 
-export type OptionsForRecipeListFilterQueryVariables = Exact<{ [key: string]: never; }>;
+export type RecipeFiltersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type OptionsForRecipeListFilterQuery = { __typename?: 'Query', tags: Array<{ __typename?: 'Tag', id: string, name: string }>, ingredients: Array<{ __typename?: 'Ingredient', id: string, name: string }> };
+export type RecipeFiltersQuery = { __typename?: 'Query', tags: Array<{ __typename?: 'Tag', id: string, name: string }>, ingredients: Array<{ __typename?: 'Ingredient', id: string, name: string }> };
+
+export type RecipesWithFiltersQueryVariables = Exact<{
+  options: RecipeSearchInput;
+}>;
+
+
+export type RecipesWithFiltersQuery = { __typename?: 'Query', recipes: Array<{ __typename?: 'RecipeOutput', id: string, title: string, creationDate: any }> };
 
 export type CreateRecipeMutationVariables = Exact<{
   input: CreateRecipeInput;
@@ -394,8 +403,8 @@ export function useHomeRecipesLazyQuery(variables: HomeRecipesQueryVariables | V
   return VueApolloComposable.useLazyQuery<HomeRecipesQuery, HomeRecipesQueryVariables>(HomeRecipesDocument, variables, options);
 }
 export type HomeRecipesQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<HomeRecipesQuery, HomeRecipesQueryVariables>;
-export const OptionsForRecipeListFilterDocument = gql`
-    query OptionsForRecipeListFilter {
+export const RecipeFiltersDocument = gql`
+    query RecipeFilters {
   tags {
     id
     name
@@ -408,22 +417,54 @@ export const OptionsForRecipeListFilterDocument = gql`
     `;
 
 /**
- * __useOptionsForRecipeListFilterQuery__
+ * __useRecipeFiltersQuery__
  *
- * To run a query within a Vue component, call `useOptionsForRecipeListFilterQuery` and pass it any options that fit your needs.
- * When your component renders, `useOptionsForRecipeListFilterQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * To run a query within a Vue component, call `useRecipeFiltersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useRecipeFiltersQuery` returns an object from Apollo Client that contains result, loading and error properties
  * you can use to render your UI.
  *
  * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
  *
  * @example
- * const { result, loading, error } = useOptionsForRecipeListFilterQuery();
+ * const { result, loading, error } = useRecipeFiltersQuery();
  */
-export function useOptionsForRecipeListFilterQuery(options: VueApolloComposable.UseQueryOptions<OptionsForRecipeListFilterQuery, OptionsForRecipeListFilterQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<OptionsForRecipeListFilterQuery, OptionsForRecipeListFilterQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<OptionsForRecipeListFilterQuery, OptionsForRecipeListFilterQueryVariables>> = {}) {
-  return VueApolloComposable.useQuery<OptionsForRecipeListFilterQuery, OptionsForRecipeListFilterQueryVariables>(OptionsForRecipeListFilterDocument, {}, options);
+export function useRecipeFiltersQuery(options: VueApolloComposable.UseQueryOptions<RecipeFiltersQuery, RecipeFiltersQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<RecipeFiltersQuery, RecipeFiltersQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<RecipeFiltersQuery, RecipeFiltersQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<RecipeFiltersQuery, RecipeFiltersQueryVariables>(RecipeFiltersDocument, {}, options);
 }
-export function useOptionsForRecipeListFilterLazyQuery(options: VueApolloComposable.UseQueryOptions<OptionsForRecipeListFilterQuery, OptionsForRecipeListFilterQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<OptionsForRecipeListFilterQuery, OptionsForRecipeListFilterQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<OptionsForRecipeListFilterQuery, OptionsForRecipeListFilterQueryVariables>> = {}) {
-  return VueApolloComposable.useLazyQuery<OptionsForRecipeListFilterQuery, OptionsForRecipeListFilterQueryVariables>(OptionsForRecipeListFilterDocument, {}, options);
+export function useRecipeFiltersLazyQuery(options: VueApolloComposable.UseQueryOptions<RecipeFiltersQuery, RecipeFiltersQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<RecipeFiltersQuery, RecipeFiltersQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<RecipeFiltersQuery, RecipeFiltersQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<RecipeFiltersQuery, RecipeFiltersQueryVariables>(RecipeFiltersDocument, {}, options);
+}
+export type RecipeFiltersQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<RecipeFiltersQuery, RecipeFiltersQueryVariables>;
+export const RecipesWithFiltersDocument = gql`
+    query RecipesWithFilters($options: RecipeSearchInput!) {
+  recipes(options: $options) {
+    id
+    title
+    creationDate
+  }
+}
+    `;
+
+/**
+ * __useRecipesWithFiltersQuery__
+ *
+ * To run a query within a Vue component, call `useRecipesWithFiltersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useRecipesWithFiltersQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param variables that will be passed into the query
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useRecipesWithFiltersQuery({
+ *   options: // value for 'options'
+ * });
+ */
+export function useRecipesWithFiltersQuery(variables: RecipesWithFiltersQueryVariables | VueCompositionApi.Ref<RecipesWithFiltersQueryVariables> | ReactiveFunction<RecipesWithFiltersQueryVariables>, options: VueApolloComposable.UseQueryOptions<RecipesWithFiltersQuery, RecipesWithFiltersQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<RecipesWithFiltersQuery, RecipesWithFiltersQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<RecipesWithFiltersQuery, RecipesWithFiltersQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<RecipesWithFiltersQuery, RecipesWithFiltersQueryVariables>(RecipesWithFiltersDocument, variables, options);
+}
+export function useRecipesWithFiltersLazyQuery(variables: RecipesWithFiltersQueryVariables | VueCompositionApi.Ref<RecipesWithFiltersQueryVariables> | ReactiveFunction<RecipesWithFiltersQueryVariables>, options: VueApolloComposable.UseQueryOptions<RecipesWithFiltersQuery, RecipesWithFiltersQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<RecipesWithFiltersQuery, RecipesWithFiltersQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<RecipesWithFiltersQuery, RecipesWithFiltersQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<RecipesWithFiltersQuery, RecipesWithFiltersQueryVariables>(RecipesWithFiltersDocument, variables, options);
 }
 export type OptionsForRecipeListFilterQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<OptionsForRecipeListFilterQuery, OptionsForRecipeListFilterQueryVariables>;
 export const CreateRecipeDocument = gql`
@@ -465,3 +506,5 @@ export function useCreateRecipeMutation(options: VueApolloComposable.UseMutation
   return VueApolloComposable.useMutation<CreateRecipeMutation, CreateRecipeMutationVariables>(CreateRecipeDocument, options);
 }
 export type CreateRecipeMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<CreateRecipeMutation, CreateRecipeMutationVariables>;
+export type RecipesWithFiltersQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<RecipesWithFiltersQuery, RecipesWithFiltersQueryVariables>;
+

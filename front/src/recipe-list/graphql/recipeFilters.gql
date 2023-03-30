@@ -1,4 +1,4 @@
-query OptionsForRecipeListFilter {
+query RecipeFilters {
 	tags {
 		id
 		name

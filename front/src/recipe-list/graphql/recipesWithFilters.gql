@@ -1,0 +1,7 @@
+query RecipesWithFilters($options: RecipeSearchInput!) {
+	recipes(options: $options) {
+		id
+		title
+		creationDate
+	}
+}
