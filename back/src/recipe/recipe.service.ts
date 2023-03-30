@@ -116,26 +116,19 @@ export class RecipeService {
 			recipeTags: [],
 		})
 
-		const [recipeTags, recipeIngredients] = await Promise.all([
-			this.tagService.createRecipeTags(tagIds),
-			this.ingredientService.createRecipeIngredients(ingredients),
-		])
-
 		const result = await this.recipeRepository.insert({
 			...recipe,
-			recipeIngredients,
-			recipeTags,
+			recipeIngredients: [],
+			recipeTags: [],
 		})
 		recipe.id = result.identifiers[0].id
-		const { creationDate } = await this.recipeRepository
-			.createQueryBuilder('recipe')
-			.select('recipe.creationDate')
-			.getOne()
-		recipe.creationDate = creationDate
-		recipe.recipeTags = recipeTags
-		recipe.recipeIngredients = recipeIngredients
+
+		await Promise.all([
+			this.tagService.createRecipeTags(tagIds, recipe),
+			this.ingredientService.createRecipeIngredients(ingredients, recipe),
+		])
+
+		recipe.creationDate = new Date()
 		return this.convertToRecipeOutput(recipe)
 	}
-
-	recipeTags
 }

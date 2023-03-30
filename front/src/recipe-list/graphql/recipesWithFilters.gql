@@ -3,5 +3,8 @@ query RecipesWithFilters($options: RecipeSearchInput!) {
 		id
 		title
 		creationDate
+		previewPicture
+		difficulty
+		cookingTime
 	}
 }

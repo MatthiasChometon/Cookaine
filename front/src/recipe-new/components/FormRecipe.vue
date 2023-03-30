@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { useCreateRecipeMutation } from '~/common/generated/graphql'
+import {
+	Difficulty,
+	MesureUnit,
+	useCreateRecipeMutation,
+} from '~/common/generated/graphql'
 
 const recipeForm = ref({
 	title: '',
