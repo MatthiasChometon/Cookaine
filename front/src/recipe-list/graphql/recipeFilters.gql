@@ -1,4 +1,4 @@
-query OptionsForRecipeListFilter {
+query RecipeFilters {
 	tags {
 		id
 		name
@@ -6,5 +6,9 @@ query OptionsForRecipeListFilter {
 	ingredients {
 		id
 		name
+	}
+	users {
+		id
+		email
 	}
 }
