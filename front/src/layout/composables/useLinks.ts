@@ -1,7 +1,7 @@
-import { useUserRole } from './useUserRole'
-import { useUserLinks } from '~/stores/links/user'
-import { useAdminLinks } from '~/stores/links/admin'
-import { useVisitorLinks } from '~/stores/links/visitor'
+import { useUserRole } from '../../common/composables/useUserRole'
+import { useUserLinks } from '~/layout/stores/links/user'
+import { useAdminLinks } from '~/layout/stores/links/admin'
+import { useVisitorLinks } from '~/layout/stores/links/visitor'
 
 export function useLinks() {
 	const userLinks = useUserLinks()

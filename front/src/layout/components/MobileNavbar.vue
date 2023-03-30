@@ -1,8 +1,3 @@
-<script setup lang="ts">
-import BurgerMenuButton from './BurgerMenuButton.vue'
-import NavbarIcon from './NavbarIcon.vue'
-</script>
-
 <template>
 	<div class="q-px-md mobile-navbar">
 		<div>
