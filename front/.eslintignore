@@ -5,3 +5,4 @@ src/common/generated/
 **/*.json
 **/*.yml
 /node_modules
+*.json
