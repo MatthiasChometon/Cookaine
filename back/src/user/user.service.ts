@@ -11,7 +11,7 @@ export class UserService {
 		@InjectRepository(User)
 		private userRepository: Repository<User>,
 	) {}
-
+ 
 	async update(user: Partial<UpdateUserInput> | string, payload: Partial<User>): Promise<void> {
 		await this.userRepository.update(user, { ...payload })
 	}

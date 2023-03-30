@@ -342,6 +342,13 @@ export enum UserStatus {
   IsPending = 'isPending'
 }
 
+export type HomeRecipesQueryVariables = Exact<{
+  options: RecipeSearchInput;
+}>;
+
+
+export type HomeRecipesQuery = { __typename?: 'Query', recipes: Array<{ __typename?: 'RecipeOutput', id: string, title: string, difficulty: Difficulty, previewPicture: string, cookingTime: any }> };
+
 export type RecipeFiltersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -355,6 +362,40 @@ export type RecipesWithFiltersQueryVariables = Exact<{
 export type RecipesWithFiltersQuery = { __typename?: 'Query', recipes: Array<{ __typename?: 'RecipeOutput', id: string, title: string, creationDate: any }> };
 
 
+export const HomeRecipesDocument = gql`
+    query HomeRecipes($options: RecipeSearchInput!) {
+  recipes(options: $options) {
+    id
+    title
+    difficulty
+    previewPicture
+    cookingTime
+  }
+}
+    `;
+
+/**
+ * __useHomeRecipesQuery__
+ *
+ * To run a query within a Vue component, call `useHomeRecipesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useHomeRecipesQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param variables that will be passed into the query
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useHomeRecipesQuery({
+ *   options: // value for 'options'
+ * });
+ */
+export function useHomeRecipesQuery(variables: HomeRecipesQueryVariables | VueCompositionApi.Ref<HomeRecipesQueryVariables> | ReactiveFunction<HomeRecipesQueryVariables>, options: VueApolloComposable.UseQueryOptions<HomeRecipesQuery, HomeRecipesQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<HomeRecipesQuery, HomeRecipesQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<HomeRecipesQuery, HomeRecipesQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<HomeRecipesQuery, HomeRecipesQueryVariables>(HomeRecipesDocument, variables, options);
+}
+export function useHomeRecipesLazyQuery(variables: HomeRecipesQueryVariables | VueCompositionApi.Ref<HomeRecipesQueryVariables> | ReactiveFunction<HomeRecipesQueryVariables>, options: VueApolloComposable.UseQueryOptions<HomeRecipesQuery, HomeRecipesQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<HomeRecipesQuery, HomeRecipesQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<HomeRecipesQuery, HomeRecipesQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<HomeRecipesQuery, HomeRecipesQueryVariables>(HomeRecipesDocument, variables, options);
+}
+export type HomeRecipesQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<HomeRecipesQuery, HomeRecipesQueryVariables>;
 export const RecipeFiltersDocument = gql`
     query RecipeFilters {
   tags {

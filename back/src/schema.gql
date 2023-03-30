@@ -227,6 +227,7 @@ type User {
 enum UserRoles {
   admin
   user
+  visitor
 }
 
 enum UserStatus {

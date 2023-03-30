@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
-import { ConnectedUser } from '../types/ConnectedUser'
-import { LoginResponse } from '../types/LoginResponse'
+import type { ConnectedUser } from '../types/ConnectedUser'
+import type { LoginResponse } from '../types/LoginResponse'
 
 export const useConnectedUser = defineStore('connectedUser', () => {
 	const { $patch } = useConnectedUser()
@@ -27,8 +27,8 @@ export const useConnectedUser = defineStore('connectedUser', () => {
 		}
 		$patch({ connectedUser: visitor })
 		localStorage.clear()
-		router.replace('/product/list')
-		const message = t('account.onLogout')
+		router.replace('/')
+		const message = t('Vous êtes déconnecté')
 		$q.notify({ message, color: 'info' })
 	}
 
