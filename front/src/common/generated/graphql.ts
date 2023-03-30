@@ -347,6 +347,13 @@ export type HomeRecipesQueryVariables = Exact<{
 
 export type HomeRecipesQuery = { __typename?: 'Query', recipes: Array<{ __typename?: 'RecipeOutput', id: string, title: string, difficulty: Difficulty, previewPicture: string, cookingTime: any }> };
 
+export type CreateIngredientMutationVariables = Exact<{
+  input: CreateIngredientInput;
+}>;
+
+
+export type CreateIngredientMutation = { __typename?: 'Mutation', createIngredient: { __typename?: 'Ingredient', id: string, name: string } };
+
 export type OptionsForRecipeListFilterQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -394,6 +401,36 @@ export function useHomeRecipesLazyQuery(variables: HomeRecipesQueryVariables | V
   return VueApolloComposable.useLazyQuery<HomeRecipesQuery, HomeRecipesQueryVariables>(HomeRecipesDocument, variables, options);
 }
 export type HomeRecipesQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<HomeRecipesQuery, HomeRecipesQueryVariables>;
+export const CreateIngredientDocument = gql`
+    mutation CreateIngredient($input: CreateIngredientInput!) {
+  createIngredient(input: $input) {
+    id
+    name
+  }
+}
+    `;
+
+/**
+ * __useCreateIngredientMutation__
+ *
+ * To run a mutation, you first call `useCreateIngredientMutation` within a Vue component and pass it any options that fit your needs.
+ * When your component renders, `useCreateIngredientMutation` returns an object that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - Several other properties: https://v4.apollo.vuejs.org/api/use-mutation.html#return
+ *
+ * @param options that will be passed into the mutation, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/mutation.html#options;
+ *
+ * @example
+ * const { mutate, loading, error, onDone } = useCreateIngredientMutation({
+ *   variables: {
+ *     input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateIngredientMutation(options: VueApolloComposable.UseMutationOptions<CreateIngredientMutation, CreateIngredientMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<CreateIngredientMutation, CreateIngredientMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<CreateIngredientMutation, CreateIngredientMutationVariables>(CreateIngredientDocument, options);
+}
+export type CreateIngredientMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<CreateIngredientMutation, CreateIngredientMutationVariables>;
 export const OptionsForRecipeListFilterDocument = gql`
     query OptionsForRecipeListFilter {
   tags {

@@ -14,6 +14,7 @@ declare module '@vue/runtime-core' {
     DesktopNavbar: typeof import('./layout/components/DesktopNavbar.vue')['default']
     EmailInput: typeof import('./common/components/forms/EmailInput.vue')['default']
     Footer: typeof import('./layout/components/Footer.vue')['default']
+    FormIngredient: typeof import('./ingredient-new/components/FormIngredient.vue')['default']
     FormRecipe: typeof import('./recipe-new/components/FormRecipe.vue')['default']
     Input: typeof import('./recipe-new/components/Input.vue')['default']
     Link: typeof import('./layout/components/Link.vue')['default']
