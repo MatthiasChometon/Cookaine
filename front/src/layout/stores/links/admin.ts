@@ -4,7 +4,7 @@ import type { Link } from '~/layout/types/Link'
 
 const amdinLinks: Link[] = [
 	{
-		page: '/',
+		page: '/admin/recipes',
 		text: 'Recettes',
 	},
 	{
