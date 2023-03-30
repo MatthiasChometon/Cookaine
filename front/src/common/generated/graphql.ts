@@ -345,6 +345,13 @@ export type OptionsForRecipeListFilterQueryVariables = Exact<{ [key: string]: ne
 
 export type OptionsForRecipeListFilterQuery = { __typename?: 'Query', tags: Array<{ __typename?: 'Tag', id: string, name: string }>, ingredients: Array<{ __typename?: 'Ingredient', id: string, name: string }> };
 
+export type RecipeAndIngredientsQueryVariables = Exact<{
+  recipeId: Scalars['String'];
+}>;
+
+
+export type RecipeAndIngredientsQuery = { __typename?: 'Query', recipe: { __typename?: 'RecipeOutput', id: string, title: string, tutorialVideo: string, difficulty: Difficulty, portion: number, steps: Array<string>, cookingTime: any, ingredients: Array<{ __typename?: 'IngredientOutput', name: string, quantity: number, mesureUnit: MesureUnit, previewPicture: string }>, tags: Array<{ __typename?: 'TagOutput', name: string }> } };
+
 
 export const OptionsForRecipeListFilterDocument = gql`
     query OptionsForRecipeListFilter {
@@ -378,3 +385,48 @@ export function useOptionsForRecipeListFilterLazyQuery(options: VueApolloComposa
   return VueApolloComposable.useLazyQuery<OptionsForRecipeListFilterQuery, OptionsForRecipeListFilterQueryVariables>(OptionsForRecipeListFilterDocument, {}, options);
 }
 export type OptionsForRecipeListFilterQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<OptionsForRecipeListFilterQuery, OptionsForRecipeListFilterQueryVariables>;
+export const RecipeAndIngredientsDocument = gql`
+    query RecipeAndIngredients($recipeId: String!) {
+  recipe(id: $recipeId) {
+    id
+    title
+    tutorialVideo
+    difficulty
+    portion
+    steps
+    cookingTime
+    ingredients {
+      name
+      quantity
+      mesureUnit
+      previewPicture
+    }
+    tags {
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __useRecipeAndIngredientsQuery__
+ *
+ * To run a query within a Vue component, call `useRecipeAndIngredientsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useRecipeAndIngredientsQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param variables that will be passed into the query
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useRecipeAndIngredientsQuery({
+ *   recipeId: // value for 'recipeId'
+ * });
+ */
+export function useRecipeAndIngredientsQuery(variables: RecipeAndIngredientsQueryVariables | VueCompositionApi.Ref<RecipeAndIngredientsQueryVariables> | ReactiveFunction<RecipeAndIngredientsQueryVariables>, options: VueApolloComposable.UseQueryOptions<RecipeAndIngredientsQuery, RecipeAndIngredientsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<RecipeAndIngredientsQuery, RecipeAndIngredientsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<RecipeAndIngredientsQuery, RecipeAndIngredientsQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<RecipeAndIngredientsQuery, RecipeAndIngredientsQueryVariables>(RecipeAndIngredientsDocument, variables, options);
+}
+export function useRecipeAndIngredientsLazyQuery(variables: RecipeAndIngredientsQueryVariables | VueCompositionApi.Ref<RecipeAndIngredientsQueryVariables> | ReactiveFunction<RecipeAndIngredientsQueryVariables>, options: VueApolloComposable.UseQueryOptions<RecipeAndIngredientsQuery, RecipeAndIngredientsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<RecipeAndIngredientsQuery, RecipeAndIngredientsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<RecipeAndIngredientsQuery, RecipeAndIngredientsQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<RecipeAndIngredientsQuery, RecipeAndIngredientsQueryVariables>(RecipeAndIngredientsDocument, variables, options);
+}
+export type RecipeAndIngredientsQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<RecipeAndIngredientsQuery, RecipeAndIngredientsQueryVariables>;

@@ -1,0 +1,25 @@
+query RecipeAndIngredients($recipeId: String!) {
+	recipe(id: $recipeId) {
+		id
+		title
+		tutorialVideo
+		difficulty
+		portion
+		steps
+		cookingTime
+    creatorId
+		creator {
+			id
+      email
+		}
+		ingredients {
+			name
+			quantity
+			mesureUnit
+			previewPicture
+		}
+		tags {
+			name
+		}
+	}
+}

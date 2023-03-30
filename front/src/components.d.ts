@@ -5,12 +5,12 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    CounterPortion: typeof import('./recipe/pages/recipe/components/counterPortion.vue')['default']
     EmailInput: typeof import('./common/components/forms/EmailInput.vue')['default']
+    ListIngredients: typeof import('./recipe/pages/recipe/components/listIngredients.vue')['default']
     LoginForm: typeof import('./authentication/components/login/LoginForm.vue')['default']
     LoginLink: typeof import('./authentication/components/login/LoginLink.vue')['default']
     PasswordConfirmationInput: typeof import('./common/components/forms/PasswordConfirmationInput.vue')['default']
-    RecipeList: typeof import('./recipe-list/components/list/RecipeList.vue')['default']
-    RecipeListFilter: typeof import('./recipe-list/components/filters/RecipeListFilter.vue')['default']
     RegisterForm: typeof import('./authentication/components/register/RegisterForm.vue')['default']
     RegisterLink: typeof import('./authentication/components/register/RegisterLink.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
