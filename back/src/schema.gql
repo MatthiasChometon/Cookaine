@@ -45,11 +45,13 @@ enum Difficulty {
 }
 
 input FilterInput {
-  difficultiesSelected: [Difficulty!]
+  difficulties: [Difficulty!] = []
+  ingredientNames: [String!] = []
   isFromConnectedUser: Boolean
   maximumCookingTime: LocalTime
   pagination: PaginationInput
   search: String
+  tagNames: [String!] = []
   userId: String
 }
 

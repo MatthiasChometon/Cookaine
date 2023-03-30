@@ -3,7 +3,7 @@
 		<div>
 			<BurgerMenuButton />
 		</div>
-		<NavbarIcon img-link="public/logoWhite.svg" class="q-pa-md" />
+		<NavbarIcon img-link="/logoWhite.svg" class="q-pa-md" />
 	</div>
 </template>
 
