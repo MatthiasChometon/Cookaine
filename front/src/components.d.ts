@@ -16,6 +16,7 @@ declare module '@vue/runtime-core' {
     DifficultiesInput: typeof import('./recipe-list/components/filters/inputs/DifficultiesInput.vue')['default']
     EmailInput: typeof import('./common/components/forms/EmailInput.vue')['default']
     Footer: typeof import('./layout/components/Footer.vue')['default']
+    FormIngredient: typeof import('./ingredient-new/components/FormIngredient.vue')['default']
     FormRecipe: typeof import('./recipe-new/components/FormRecipe.vue')['default']
     Input: typeof import('./recipe-new/components/Input.vue')['default']
     IngredientsFilter: typeof import('./recipe-list/components/filters/recipe-list-filter/filters/IngredientsFilter.vue')['default']
