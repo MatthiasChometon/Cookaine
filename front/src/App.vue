@@ -2,8 +2,8 @@
 import { useRefreshConnectedUser } from './authentication/composables/useRefreshConnectedUser'
 
 useHead({
-	title: 'App title',
-	meta: [{ name: 'description', content: 'App title' }],
+	title: 'Cookaine',
+	meta: [{ name: 'Cookaine', content: 'Cookaine' }],
 })
 
 useRefreshConnectedUser()

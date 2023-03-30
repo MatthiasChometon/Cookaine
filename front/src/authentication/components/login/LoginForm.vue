@@ -26,7 +26,7 @@ onDone((result) => {
 
 <template>
 	<div class="full-height flex justify-center items-center column">
-		<div class="flex justify-center text-h5 q-pb-md text-primary">connection</div>
+		<div class="flex justify-center text-h5 q-pb-md text-primary">Connexion</div>
 		<q-form class="q-gutter-md q-pt-md" @submit="login({ input: loginInput })">
 			<q-input
 				v-model="loginInput.email"
@@ -58,7 +58,7 @@ onDone((result) => {
 			</q-input>
 
 			<q-card-actions align="center">
-				<q-btn label="login" type="submit" color="primary" />
+				<q-btn label="Connexion" type="submit" color="primary" />
 			</q-card-actions>
 
 			<RegisterLink />
