@@ -5,8 +5,6 @@ const props = defineProps<{
 	link: Link
 	class: string
 }>()
-
-const { t } = useI18n()
 function runLinkEvent() {
 	if (props.link.event) props.link.event()
 }
@@ -19,7 +17,7 @@ function runLinkEvent() {
 		:class="props.class"
 		@click="runLinkEvent"
 	>
-		{{ t(link.text) }}
+		{{ link.text }}
 	</router-link>
 </template>
 

@@ -4,11 +4,11 @@ import type { Link } from '~/layout/types/Link'
 
 const userLinks: Link[] = [
 	{
-		page: '/',
+		page: '/recipes',
 		text: 'Liste des recettes',
 	},
 	{
-		page: '/',
+		page: '/my-recipes',
 		text: 'Vos recettes',
 	},
 	{

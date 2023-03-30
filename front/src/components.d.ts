@@ -36,6 +36,7 @@ declare module '@vue/runtime-core' {
     RecipeCreatorFilter: typeof import('./recipe-list/components/filters/recipe-list-filter/filters/RecipeCreatorFilter.vue')['default']
     RecipeList: typeof import('./recipe-list/components/list/RecipeList.vue')['default']
     RecipeListFilter: typeof import('./recipe-list/components/filters/recipe-list-filter/RecipeListFilter.vue')['default']
+    RecipeListWithFilter: typeof import('./recipe-list/components/RecipeListWithFilter.vue')['default']
     RegisterForm: typeof import('./authentication/components/register/RegisterForm.vue')['default']
     RegisterLink: typeof import('./authentication/components/register/RegisterLink.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

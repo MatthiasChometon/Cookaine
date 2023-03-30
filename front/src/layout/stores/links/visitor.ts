@@ -4,7 +4,7 @@ import type { Link } from '~/layout/types/Link'
 
 const visitorLinks: Link[] = [
 	{
-		page: '/',
+		page: '/recipes',
 		text: 'Liste des recettes',
 	},
 ]
