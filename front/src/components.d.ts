@@ -5,6 +5,8 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    CounterPortion: typeof import('./recipe/pages/recipe/components/counterPortion.vue')['default']
+    EmailInput: typeof import('./common/components/forms/EmailInput.vue')['default']
     BurgerMenuButton: typeof import('./layout/components/BurgerMenuButton.vue')['default']
     BurgerMenuLinks: typeof import('./layout/components/BurgerMenuLinks.vue')['default']
     CardRecipe: typeof import('./common/components/forms/CardRecipe.vue')['default']
