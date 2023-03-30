@@ -20,6 +20,12 @@ export class FilterInput {
 	@Field(() => GraphQLLocalTime, { nullable: true })
 	maximumCookingTime?: string
 
-	@Field(() => [Difficulty], { nullable: true })
-	difficultiesSelected?: Difficulty[]
+	@Field(() => [Difficulty], { nullable: true, defaultValue: [] })
+	difficulties?: Difficulty[]
+
+	@Field(() => [String], { nullable: true, defaultValue: [] })
+	tagNames?: string[]
+
+	@Field(() => [String], { nullable: true, defaultValue: [] })
+	ingredientNames?: string[]
 }
