@@ -1,19 +1,29 @@
 <script setup lang="ts">
-const { userIds } = defineProps<{
-	userIds: string[]
+const { users } = defineProps<{
+	users: {
+		id: string
+		email: string
+	}[]
 }>()
 defineEmits(['update'])
 
-const userId = ref<string>()
+const user = ref<{
+	id: string
+	email: string
+}>()
 </script>
 
 <template>
-	<p class="q-mt-md">Créateur</p>
+	<p class="q-mt-md">Créateurs</p>
 	<q-select
-		v-model="userId"
+		v-model="user"
 		filled
-		use-input
-		:options="userIds"
+		emit-value
+		map-options
+		option-label="email"
+		option-value="id"
+		:options="users"
+		clearable
 		@update:model-value="(v) => $emit('update', v)"
 	/>
 </template>

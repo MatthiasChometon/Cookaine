@@ -13,7 +13,7 @@ const {
 	loading: isLoadingFilters,
 	onError: onErrorFilters,
 	error: hasFiltersError,
-} = useRecipeFiltersQuery()
+} = useAdminRecipeFiltersQuery()
 const {
 	result: recipesResult,
 	loading: isLoadingRecipes,
@@ -32,6 +32,7 @@ onErrorRecipes(() => sendError('Impossible de charger les recettes'))
 		:ingredients="filtersResult?.ingredients ?? []"
 		:tags="filtersResult?.tags ?? []"
 		:recipes="recipesResult?.recipes ?? []"
+		:users="filtersResult?.users"
 		:has-recipes-error="hasRecipesError !== null"
 		:default-options="defaultOptions"
 		:is-loading-recipes="isLoadingRecipes"

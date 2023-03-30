@@ -6,11 +6,14 @@ const {
 	ingredientNames,
 	defaultOptions,
 	hasFilterByUserId = false,
-	userIds,
+	users,
 } = defineProps<{
 	tagNames: string[]
 	ingredientNames: string[]
-	userIds?: string[]
+	users?: {
+		id: string
+		email: string
+	}[]
 	defaultOptions: RecipeSearchInput
 	hasFilterByUserId?: boolean
 }>()
@@ -25,11 +28,11 @@ const options: Ref = ref(defaultOptions)
 		<RecipeCreatorConnectedUserFilter
 			v-if="hasFilterByUserId"
 			:default-value="defaultOptions?.filterBy?.isFromConnectedUser ?? false"
-			@update="(v) => (options.filterBy.userId = v)"
+			@update="(v) => (options.filterBy.isFromConnectedUser = v)"
 		/>
 		<RecipeCreatorFilter
-			v-if="hasFilterByUserId && userIds !== undefined"
-			:user-ids="userIds"
+			v-if="users !== undefined"
+			:users="users"
 			@update="(v) => (options.filterBy.userId = v)"
 		/>
 		<TagsFilter

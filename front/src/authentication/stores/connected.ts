@@ -5,7 +5,6 @@ import type { LoginResponse } from '../types/LoginResponse'
 export const useConnectedUser = defineStore('connectedUser', () => {
 	const { $patch } = useConnectedUser()
 	const router = useRouter()
-	const { t } = useI18n()
 	const $q = useQuasar()
 	const connectedUser: ConnectedUser = $ref({
 		role: 'visitor',
@@ -28,7 +27,7 @@ export const useConnectedUser = defineStore('connectedUser', () => {
 		$patch({ connectedUser: visitor })
 		localStorage.clear()
 		router.replace('/')
-		const message = t('Vous êtes déconnecté')
+		const message = 'Vous êtes déconnecté'
 		$q.notify({ message, color: 'info' })
 	}
 

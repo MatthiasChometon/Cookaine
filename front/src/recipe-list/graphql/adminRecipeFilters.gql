@@ -1,0 +1,14 @@
+query AdminRecipeFilters {
+	tags {
+		id
+		name
+	}
+	ingredients {
+		id
+		name
+	}
+	users {
+		id
+		email
+	}
+}
