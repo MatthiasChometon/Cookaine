@@ -345,7 +345,7 @@ export enum UserStatus {
 export type RecipeFiltersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type RecipeFiltersQuery = { __typename?: 'Query', tags: Array<{ __typename?: 'Tag', id: string, name: string }>, ingredients: Array<{ __typename?: 'Ingredient', id: string, name: string }>, users: Array<{ __typename?: 'User', id: string, email: string }> };
+export type RecipeFiltersQuery = { __typename?: 'Query', tags: Array<{ __typename?: 'Tag', id: string, name: string }>, ingredients: Array<{ __typename?: 'Ingredient', id: string, name: string }> };
 
 export type RecipesWithFiltersQueryVariables = Exact<{
   options: RecipeSearchInput;
@@ -364,10 +364,6 @@ export const RecipeFiltersDocument = gql`
   ingredients {
     id
     name
-  }
-  users {
-    id
-    email
   }
 }
     `;

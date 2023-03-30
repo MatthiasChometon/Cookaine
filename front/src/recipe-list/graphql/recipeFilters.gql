@@ -7,8 +7,4 @@ query RecipeFilters {
 		id
 		name
 	}
-	users {
-		id
-		email
-	}
 }
