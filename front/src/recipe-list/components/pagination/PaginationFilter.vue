@@ -5,7 +5,7 @@ const current = ref(defaultValue)
 </script>
 
 <template>
-	<div class="q-pa-lg flex">
+	<div class="q-pa-lg flex justify-center">
 		<q-pagination
 			v-model="current"
 			color="black"

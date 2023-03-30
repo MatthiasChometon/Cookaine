@@ -360,7 +360,7 @@ export type RecipesWithFiltersQueryVariables = Exact<{
 }>;
 
 
-export type RecipesWithFiltersQuery = { __typename?: 'Query', recipes: Array<{ __typename?: 'RecipeOutput', id: string, title: string, creationDate: any }> };
+export type RecipesWithFiltersQuery = { __typename?: 'Query', recipes: Array<{ __typename?: 'RecipeOutput', id: string, title: string, creationDate: any, previewPicture: string, difficulty: Difficulty, cookingTime: any }> };
 
 
 export const HomeRecipesDocument = gql`
@@ -435,6 +435,9 @@ export const RecipesWithFiltersDocument = gql`
     id
     title
     creationDate
+    previewPicture
+    difficulty
+    cookingTime
   }
 }
     `;
