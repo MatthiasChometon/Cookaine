@@ -333,7 +333,8 @@ export type User = {
 
 export enum UserRoles {
   Admin = 'admin',
-  User = 'user'
+  User = 'user',
+  Visitor = 'visitor'
 }
 
 export enum UserStatus {
