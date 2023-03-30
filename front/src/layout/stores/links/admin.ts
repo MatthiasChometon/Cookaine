@@ -16,7 +16,7 @@ const amdinLinks: Link[] = [
 		text: 'Tags',
 	},
 	{
-		page: '/',
+		page: '/ingredient-list',
 		text: 'Ingrédients',
 	},
 ]

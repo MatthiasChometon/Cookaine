@@ -131,6 +131,7 @@ input PaginationInput {
 
 type Query {
   account: User!
+  ingredient(id: String!): Ingredient!
   ingredients: [Ingredient!]!
   recipe(id: String!): RecipeOutput!
   recipes(options: RecipeSearchInput!): [RecipeOutput!]!

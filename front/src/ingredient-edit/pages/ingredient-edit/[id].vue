@@ -1,10 +1,21 @@
 <script setup lang="ts">
-import { useCreateIngredientMutation } from '~/common/generated/graphql'
+const route = useRoute()
+const { loading, error, onResult } = useIngredientQuery({
+	id: String(route.params.id),
+})
+
+const id = ref(String(route.params.id))
 
 const ingredientForm = ref({
 	name: '',
 	previewPicture: '',
 	mesureUnits: [MesureUnit.Gram],
+})
+
+onResult((result) => {
+	ingredientForm.value.name = result.data.ingredient.name
+	ingredientForm.value.previewPicture = result.data.ingredient.previewPicture
+	ingredientForm.value.mesureUnits = result.data.ingredient.mesureUnits
 })
 
 const mesureUnitOptions = [
@@ -52,14 +63,14 @@ const mesureUnitOptions = [
 
 const { sendNotification } = useNotification()
 
-const { onDone, mutate: createIngredien } = useCreateIngredientMutation()
+const { onDone, mutate: updateIngredient } = useUpdateIngredientMutation()
 const router = useRouter()
 
 onDone((result) => {
 	sendNotification(
 		result,
-		'Ingrédient ajouter',
-		'Une erreur est survenue lors de la création de votre ingrédient',
+		'Ingrédient modifier',
+		'Une erreur est survenue lors de la modification de votre ingrédient',
 	)
 	if (result.errors) return
 
@@ -68,8 +79,13 @@ onDone((result) => {
 </script>
 
 <template>
-	<q-form class="q-ma-md" @submit="createIngredien({ input: ingredientForm })">
-		<div>
+	<h5 class="text-center">Modifier votre ingrédient</h5>
+
+	<q-form
+		class="q-ma-md"
+		@submit="updateIngredient({ input: ingredientForm, id })"
+	>
+		<div v-if="!loading && !error">
 			<div class="flex q-mr-md justify-around" style="width: 100%">
 				<Input
 					type="text"
@@ -100,7 +116,7 @@ onDone((result) => {
 		</div>
 
 		<div class="flex justify-center">
-			<q-btn label="Ajouter un ingrédient" type="submit" color="primary" />
+			<q-btn label="Modifier l'ingrdient" type="submit" color="primary" />
 		</div>
 	</q-form>
 </template>

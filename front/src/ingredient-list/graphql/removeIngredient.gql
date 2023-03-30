@@ -1,0 +1,5 @@
+mutation RemoveIngredient($id: String!) {
+		removeIngredient(id: $id) {
+            id
+		}
+	}
