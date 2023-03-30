@@ -1,8 +1,3 @@
-<script setup lang="ts">
-import MobileNavbar from './MobileNavbar.vue'
-import DesktopNavbar from './DesktopNavbar.vue'
-</script>
-
 <template>
 	<q-header class="bg-primary flex q-header">
 		<DesktopNavbar />

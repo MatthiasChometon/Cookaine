@@ -1,8 +1,3 @@
-<script setup lang="ts">
-import Footer from '~/layout/component/Footer.vue'
-import Navbar from '~/layout/component/Navbar.vue'
-</script>
-
 <template>
 	<q-layout view="lhr lpr lfr">
 		<Navbar />

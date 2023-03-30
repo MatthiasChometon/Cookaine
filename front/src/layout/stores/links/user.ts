@@ -1,6 +1,6 @@
 import type { CreateGlobalStateReturn, RemovableRef } from '@vueuse/core'
 import { createGlobalState } from '@vueuse/core'
-import type { Link } from '~/types/Link'
+import type { Link } from '~/layout/types/Link'
 
 const userLinks: Link[] = [
 	{

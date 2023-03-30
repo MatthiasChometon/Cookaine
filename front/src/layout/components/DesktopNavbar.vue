@@ -1,11 +1,4 @@
 <script setup lang="ts">
-import NavbarIcon from './NavbarIcon.vue'
-import NavbarLinks from './NavbarLinks.vue'
-import NavbarSearch from './NavbarSearch.vue'
-import ConnexionButton from './ConnexionButton.vue'
-import DeconnexionButton from './DeconnexionButton.vue'
-import { useUserRole } from '~/composables/useUserRole'
-
 const { isVisitor } = useUserRole()
 </script>
 
