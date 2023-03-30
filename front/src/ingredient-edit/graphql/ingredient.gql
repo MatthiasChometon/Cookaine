@@ -1,0 +1,8 @@
+query Ingredient($id: String!) {
+	ingredient(id: $id) {
+		id
+		name
+        previewPicture
+        mesureUnits
+	}
+}

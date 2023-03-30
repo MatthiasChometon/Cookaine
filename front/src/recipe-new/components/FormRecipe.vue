@@ -97,9 +97,7 @@ const mesureUnitOptions = [
 		value: MesureUnit.Unity,
 	},
 ]
-const { result, loading, error, onError } = useOptionsForRecipeListFilterQuery(
-	{},
-)
+const { result, loading, error, onError } = useRecipeFiltersQuery({})
 const { sendError, sendNotification } = useNotification()
 onError(() => sendError('Une erreur est survenue'))
 

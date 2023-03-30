@@ -2,7 +2,7 @@
 import type { QSelectProps } from 'quasar'
 
 const { model, options, rules } = defineProps<{
-	model: string[]
+	model: string[] | undefined
 	label: string
 	rules: any
 	options: QSelectProps['options']

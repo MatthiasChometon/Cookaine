@@ -2,7 +2,7 @@
 import type { QInputProps } from 'quasar'
 
 const { model, label, rules } = defineProps<{
-	model: string
+	model: string | undefined
 	label: string
 	rules: any
 	type: QInputProps['type']

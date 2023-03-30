@@ -43,4 +43,10 @@ export class IngredientResolver {
 	ingredients(): Promise<Ingredient[]> {
 		return this.ingredientRepository.find()
 	}
+
+	@Query(() => Ingredient)
+	@IsPublic()
+	ingredient(@Args('id') id: string): Promise<Ingredient> {
+		return this.ingredientRepository.findOneBy({ id })
+	}
 }

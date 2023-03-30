@@ -56,11 +56,13 @@ export enum Difficulty {
 }
 
 export type FilterInput = {
-  difficultiesSelected?: InputMaybe<Array<Difficulty>>;
+  difficulties?: InputMaybe<Array<Difficulty>>;
+  ingredientNames?: InputMaybe<Array<Scalars['String']>>;
   isFromConnectedUser?: InputMaybe<Scalars['Boolean']>;
   maximumCookingTime?: InputMaybe<Scalars['LocalTime']>;
   pagination?: InputMaybe<PaginationInput>;
   search?: InputMaybe<Scalars['String']>;
+  tagNames?: InputMaybe<Array<Scalars['String']>>;
   userId?: InputMaybe<Scalars['String']>;
 };
 
@@ -219,12 +221,18 @@ export type PaginationInput = {
 export type Query = {
   __typename?: 'Query';
   account: User;
+  ingredient: Ingredient;
   ingredients: Array<Ingredient>;
   recipe: RecipeOutput;
   recipes: Array<RecipeOutput>;
   tags: Array<Tag>;
   user: User;
   users: Array<User>;
+};
+
+
+export type QueryIngredientArgs = {
+  id: Scalars['String'];
 };
 
 
@@ -347,6 +355,33 @@ export type HomeRecipesQueryVariables = Exact<{
 
 export type HomeRecipesQuery = { __typename?: 'Query', recipes: Array<{ __typename?: 'RecipeOutput', id: string, title: string, difficulty: Difficulty, previewPicture: string, cookingTime: any }> };
 
+export type IngredientQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type IngredientQuery = { __typename?: 'Query', ingredient: { __typename?: 'Ingredient', id: string, name: string, previewPicture: string, mesureUnits: Array<MesureUnit> } };
+
+export type UpdateIngredientMutationVariables = Exact<{
+  id: Scalars['String'];
+  input: UpdateIngredientInput;
+}>;
+
+
+export type UpdateIngredientMutation = { __typename?: 'Mutation', updateIngredient: { __typename?: 'Ingredient', id: string } };
+
+export type IngredientsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type IngredientsQuery = { __typename?: 'Query', ingredients: Array<{ __typename?: 'Ingredient', id: string, name: string }> };
+
+export type RemoveIngredientMutationVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type RemoveIngredientMutation = { __typename?: 'Mutation', removeIngredient: { __typename?: 'Ingredient', id: string } };
+
 export type CreateIngredientMutationVariables = Exact<{
   input: CreateIngredientInput;
 }>;
@@ -408,6 +443,126 @@ export function useHomeRecipesLazyQuery(variables: HomeRecipesQueryVariables | V
   return VueApolloComposable.useLazyQuery<HomeRecipesQuery, HomeRecipesQueryVariables>(HomeRecipesDocument, variables, options);
 }
 export type HomeRecipesQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<HomeRecipesQuery, HomeRecipesQueryVariables>;
+export const IngredientDocument = gql`
+    query Ingredient($id: String!) {
+  ingredient(id: $id) {
+    id
+    name
+    previewPicture
+    mesureUnits
+  }
+}
+    `;
+
+/**
+ * __useIngredientQuery__
+ *
+ * To run a query within a Vue component, call `useIngredientQuery` and pass it any options that fit your needs.
+ * When your component renders, `useIngredientQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param variables that will be passed into the query
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useIngredientQuery({
+ *   id: // value for 'id'
+ * });
+ */
+export function useIngredientQuery(variables: IngredientQueryVariables | VueCompositionApi.Ref<IngredientQueryVariables> | ReactiveFunction<IngredientQueryVariables>, options: VueApolloComposable.UseQueryOptions<IngredientQuery, IngredientQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<IngredientQuery, IngredientQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<IngredientQuery, IngredientQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<IngredientQuery, IngredientQueryVariables>(IngredientDocument, variables, options);
+}
+export function useIngredientLazyQuery(variables: IngredientQueryVariables | VueCompositionApi.Ref<IngredientQueryVariables> | ReactiveFunction<IngredientQueryVariables>, options: VueApolloComposable.UseQueryOptions<IngredientQuery, IngredientQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<IngredientQuery, IngredientQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<IngredientQuery, IngredientQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<IngredientQuery, IngredientQueryVariables>(IngredientDocument, variables, options);
+}
+export type IngredientQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<IngredientQuery, IngredientQueryVariables>;
+export const UpdateIngredientDocument = gql`
+    mutation UpdateIngredient($id: String!, $input: UpdateIngredientInput!) {
+  updateIngredient(id: $id, input: $input) {
+    id
+  }
+}
+    `;
+
+/**
+ * __useUpdateIngredientMutation__
+ *
+ * To run a mutation, you first call `useUpdateIngredientMutation` within a Vue component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateIngredientMutation` returns an object that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - Several other properties: https://v4.apollo.vuejs.org/api/use-mutation.html#return
+ *
+ * @param options that will be passed into the mutation, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/mutation.html#options;
+ *
+ * @example
+ * const { mutate, loading, error, onDone } = useUpdateIngredientMutation({
+ *   variables: {
+ *     id: // value for 'id'
+ *     input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateIngredientMutation(options: VueApolloComposable.UseMutationOptions<UpdateIngredientMutation, UpdateIngredientMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<UpdateIngredientMutation, UpdateIngredientMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<UpdateIngredientMutation, UpdateIngredientMutationVariables>(UpdateIngredientDocument, options);
+}
+export type UpdateIngredientMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<UpdateIngredientMutation, UpdateIngredientMutationVariables>;
+export const IngredientsDocument = gql`
+    query Ingredients {
+  ingredients {
+    id
+    name
+  }
+}
+    `;
+
+/**
+ * __useIngredientsQuery__
+ *
+ * To run a query within a Vue component, call `useIngredientsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useIngredientsQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useIngredientsQuery();
+ */
+export function useIngredientsQuery(options: VueApolloComposable.UseQueryOptions<IngredientsQuery, IngredientsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<IngredientsQuery, IngredientsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<IngredientsQuery, IngredientsQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<IngredientsQuery, IngredientsQueryVariables>(IngredientsDocument, {}, options);
+}
+export function useIngredientsLazyQuery(options: VueApolloComposable.UseQueryOptions<IngredientsQuery, IngredientsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<IngredientsQuery, IngredientsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<IngredientsQuery, IngredientsQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<IngredientsQuery, IngredientsQueryVariables>(IngredientsDocument, {}, options);
+}
+export type IngredientsQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<IngredientsQuery, IngredientsQueryVariables>;
+export const RemoveIngredientDocument = gql`
+    mutation RemoveIngredient($id: String!) {
+  removeIngredient(id: $id) {
+    id
+  }
+}
+    `;
+
+/**
+ * __useRemoveIngredientMutation__
+ *
+ * To run a mutation, you first call `useRemoveIngredientMutation` within a Vue component and pass it any options that fit your needs.
+ * When your component renders, `useRemoveIngredientMutation` returns an object that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - Several other properties: https://v4.apollo.vuejs.org/api/use-mutation.html#return
+ *
+ * @param options that will be passed into the mutation, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/mutation.html#options;
+ *
+ * @example
+ * const { mutate, loading, error, onDone } = useRemoveIngredientMutation({
+ *   variables: {
+ *     id: // value for 'id'
+ *   },
+ * });
+ */
+export function useRemoveIngredientMutation(options: VueApolloComposable.UseMutationOptions<RemoveIngredientMutation, RemoveIngredientMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<RemoveIngredientMutation, RemoveIngredientMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<RemoveIngredientMutation, RemoveIngredientMutationVariables>(RemoveIngredientDocument, options);
+}
+export type RemoveIngredientMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<RemoveIngredientMutation, RemoveIngredientMutationVariables>;
 export const CreateIngredientDocument = gql`
     mutation CreateIngredient($input: CreateIngredientInput!) {
   createIngredient(input: $input) {
