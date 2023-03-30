@@ -1,5 +1,4 @@
-import { acceptHMRUpdate, defineStore } from 'pinia'
-import { useQuasar } from 'quasar'
+import { defineStore } from 'pinia'
 import type { GraphqlResult } from '../types/graphql/GraphqlResult'
 
 export const useNotification = defineStore('notification', () => {
@@ -15,8 +14,9 @@ export const useNotification = defineStore('notification', () => {
 		$q.notify({ color, textColor: 'white', message })
 	}
 
-	return { sendNotification }
-})
+	function sendError(message: string) {
+		$q.notify({ color: 'warning', textColor: 'white', message })
+	}
 
-if (import.meta.hot)
-	import.meta.hot.accept(acceptHMRUpdate(useNotification, import.meta.hot))
+	return { sendNotification, sendError }
+})
