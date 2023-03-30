@@ -16,6 +16,8 @@ declare module '@vue/runtime-core' {
     DifficultiesInput: typeof import('./recipe-list/components/filters/inputs/DifficultiesInput.vue')['default']
     EmailInput: typeof import('./common/components/forms/EmailInput.vue')['default']
     Footer: typeof import('./layout/components/Footer.vue')['default']
+    FormRecipe: typeof import('./recipe-new/components/FormRecipe.vue')['default']
+    Input: typeof import('./recipe-new/components/Input.vue')['default']
     IngredientsFilter: typeof import('./recipe-list/components/filters/recipe-list-filter/filters/IngredientsFilter.vue')['default']
     Link: typeof import('./layout/components/Link.vue')['default']
     LoginForm: typeof import('./authentication/components/login/LoginForm.vue')['default']
@@ -37,6 +39,10 @@ declare module '@vue/runtime-core' {
     RegisterLink: typeof import('./authentication/components/register/RegisterLink.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Select: typeof import('./recipe-new/components/Select.vue')['default']
+    SelectAutocomplete: typeof import('./recipe-new/components/SelectAutocomplete.vue')['default']
+    SelectMultiple: typeof import('./recipe-new/components/SelectMultiple.vue')['default']
+    Time: typeof import('./recipe-new/components/Time.vue')['default']
     TagsFilter: typeof import('./recipe-list/components/filters/recipe-list-filter/filters/TagsFilter.vue')['default']
   }
 }

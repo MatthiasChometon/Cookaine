@@ -6,11 +6,11 @@ const { sendError } = useNotification()
 
 const { result, loading, onError, error } = useHomeRecipesQuery({
 	options: {
+		filterBy: { pagination: { page: 1, itemsPerPage: 2 } },
 		orderBy: {
-			direction: OrderDirection.Desc,
 			name: RecipeOrderName.CreationDate,
+			direction: OrderDirection.Desc,
 		},
-		filterBy: { pagination: { page: 1, itemsPerPage: 3 } },
 	},
 })
 onError(() => sendError('Une erreur est survenue'))

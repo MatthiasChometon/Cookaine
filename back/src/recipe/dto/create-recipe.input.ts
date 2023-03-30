@@ -3,7 +3,7 @@ import { MaxLength, MinLength } from 'class-validator'
 import { Recipe } from '../entities/recipe.entity'
 import { Difficulty } from '../enums/difficulty.enum'
 import { CreateRecipeIngredientInput } from './create-recipe-ingredient.input'
-import { GraphQLTime } from 'graphql-scalars'
+import { GraphQLLocalTime } from 'graphql-scalars'
 
 @InputType()
 export class CreateRecipeInput extends OmitType(Recipe, [
@@ -27,7 +27,7 @@ export class CreateRecipeInput extends OmitType(Recipe, [
 	@Field()
 	tutorialVideo: string
 
-	@Field(() => GraphQLTime)
+	@Field(() => GraphQLLocalTime)
 	cookingTime: string
 
 	@Field(() => Difficulty)

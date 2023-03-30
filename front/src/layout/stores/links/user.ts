@@ -12,7 +12,7 @@ const userLinks: Link[] = [
 		text: 'Vos recettes',
 	},
 	{
-		page: '/',
+		page: '/recipe-new',
 		text: 'Ajouter une recette',
 	},
 ]

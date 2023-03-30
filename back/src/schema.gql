@@ -15,7 +15,7 @@ input CreateRecipeIngredientInput {
 }
 
 input CreateRecipeInput {
-  cookingTime: Time!
+  cookingTime: LocalTime!
   difficulty: Difficulty!
   ingredients: [CreateRecipeIngredientInput!]!
   portion: Int!
@@ -198,11 +198,6 @@ type TagOutput {
   recipeTagId: ID!
   tagId: ID!
 }
-
-"""
-A time string at UTC, such as 10:15:30Z, compliant with the `full-time` format outlined in section 5.6 of the RFC 3339profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
-"""
-scalar Time
 
 input UpdateIngredientInput {
   mesureUnits: [MesureUnit!]

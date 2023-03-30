@@ -16,7 +16,6 @@ export type Scalars = {
   Float: number;
   DateTime: any;
   LocalTime: any;
-  Time: any;
 };
 
 export type CreateIngredientInput = {
@@ -32,7 +31,7 @@ export type CreateRecipeIngredientInput = {
 };
 
 export type CreateRecipeInput = {
-  cookingTime: Scalars['Time'];
+  cookingTime: Scalars['LocalTime'];
   difficulty: Difficulty;
   ingredients: Array<CreateRecipeIngredientInput>;
   portion: Scalars['Int'];
@@ -362,6 +361,13 @@ export type RecipesWithFiltersQueryVariables = Exact<{
 
 export type RecipesWithFiltersQuery = { __typename?: 'Query', recipes: Array<{ __typename?: 'RecipeOutput', id: string, title: string, creationDate: any }> };
 
+export type CreateRecipeMutationVariables = Exact<{
+  input: CreateRecipeInput;
+}>;
+
+
+export type CreateRecipeMutation = { __typename?: 'Mutation', createRecipe: { __typename?: 'RecipeOutput', id: string, title: string, creationDate: any, ingredients: Array<{ __typename?: 'IngredientOutput', ingredientId: string, name: string, mesureUnit: MesureUnit }>, tags: Array<{ __typename?: 'TagOutput', name: string }> } };
+
 
 export const HomeRecipesDocument = gql`
     query HomeRecipes($options: RecipeSearchInput!) {
@@ -460,4 +466,45 @@ export function useRecipesWithFiltersQuery(variables: RecipesWithFiltersQueryVar
 export function useRecipesWithFiltersLazyQuery(variables: RecipesWithFiltersQueryVariables | VueCompositionApi.Ref<RecipesWithFiltersQueryVariables> | ReactiveFunction<RecipesWithFiltersQueryVariables>, options: VueApolloComposable.UseQueryOptions<RecipesWithFiltersQuery, RecipesWithFiltersQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<RecipesWithFiltersQuery, RecipesWithFiltersQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<RecipesWithFiltersQuery, RecipesWithFiltersQueryVariables>> = {}) {
   return VueApolloComposable.useLazyQuery<RecipesWithFiltersQuery, RecipesWithFiltersQueryVariables>(RecipesWithFiltersDocument, variables, options);
 }
+export type OptionsForRecipeListFilterQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<OptionsForRecipeListFilterQuery, OptionsForRecipeListFilterQueryVariables>;
+export const CreateRecipeDocument = gql`
+    mutation CreateRecipe($input: CreateRecipeInput!) {
+  createRecipe(input: $input) {
+    id
+    title
+    creationDate
+    ingredients {
+      ingredientId
+      name
+      mesureUnit
+    }
+    tags {
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __useCreateRecipeMutation__
+ *
+ * To run a mutation, you first call `useCreateRecipeMutation` within a Vue component and pass it any options that fit your needs.
+ * When your component renders, `useCreateRecipeMutation` returns an object that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - Several other properties: https://v4.apollo.vuejs.org/api/use-mutation.html#return
+ *
+ * @param options that will be passed into the mutation, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/mutation.html#options;
+ *
+ * @example
+ * const { mutate, loading, error, onDone } = useCreateRecipeMutation({
+ *   variables: {
+ *     input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateRecipeMutation(options: VueApolloComposable.UseMutationOptions<CreateRecipeMutation, CreateRecipeMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<CreateRecipeMutation, CreateRecipeMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<CreateRecipeMutation, CreateRecipeMutationVariables>(CreateRecipeDocument, options);
+}
+export type CreateRecipeMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<CreateRecipeMutation, CreateRecipeMutationVariables>;
 export type RecipesWithFiltersQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<RecipesWithFiltersQuery, RecipesWithFiltersQueryVariables>;
+
