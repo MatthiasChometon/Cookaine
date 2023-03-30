@@ -32,15 +32,13 @@ onErrorFilters(() => sendError('Impossible de charger les filtres'))
 onErrorRecipes(() => sendError('Impossible de charger les recettes'))
 
 const recipesFilters = computed(() => {
-	const { ingredients, tags, users } = filtersResult?.value ?? {
+	const { ingredients, tags } = filtersResult?.value ?? {
 		tags: [],
 		ingredients: [],
-		users: [],
 	}
 	return {
 		ingredients: ingredients.map(({ name }) => name),
 		tags: tags.map(({ name }) => name),
-		users: users.map(({ id }) => id),
 	}
 })
 
