@@ -6,5 +6,10 @@ const props = defineProps<{
 
 <template>
 	<router-link to="/">
-		<q-img :src="props.imgLink" spinner-color="white" style="width: 60px" fit="contain" /></router-link>
+		<q-img
+			:src="props.imgLink"
+			spinner-color="white"
+			style="width: 60px"
+			fit="contain"
+	/></router-link>
 </template>

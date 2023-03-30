@@ -116,7 +116,7 @@ export class RecipeService {
 			recipeTags: [],
 		})
 
-		const [recipeIngredients, recipeTags] = await Promise.all([
+		const [recipeTags, recipeIngredients] = await Promise.all([
 			this.tagService.createRecipeTags(tagIds),
 			this.ingredientService.createRecipeIngredients(ingredients),
 		])
@@ -132,6 +132,8 @@ export class RecipeService {
 			.select('recipe.creationDate')
 			.getOne()
 		recipe.creationDate = creationDate
+		recipe.recipeTags = recipeTags
+		recipe.recipeIngredients = recipeIngredients
 		return this.convertToRecipeOutput(recipe)
 	}
 
