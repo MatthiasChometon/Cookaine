@@ -1,0 +1,9 @@
+query HomeRecipes($options: RecipeSearchInput!) {
+		recipes(options: $options) {
+			id
+			title
+			difficulty
+			previewPicture
+			cookingTime
+		}
+	}

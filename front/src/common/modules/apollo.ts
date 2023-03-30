@@ -28,7 +28,10 @@ export const install: UserModule = ({ app }) => {
 		link: authLink.concat(link),
 		cache,
 		uri,
-		defaultOptions: { mutate: { errorPolicy: 'all' } },
+		defaultOptions: {
+			mutate: { errorPolicy: 'all' },
+			watchQuery: { fetchPolicy: 'cache-and-network' },
+		},
 	})
 
 	app.provide(DefaultApolloClient, apolloClient)

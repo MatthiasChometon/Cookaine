@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
-import { ConnectedUser } from '../types/ConnectedUser'
-import { LoginResponse } from '../types/LoginResponse'
+import type { ConnectedUser } from '../types/ConnectedUser'
+import type { LoginResponse } from '../types/LoginResponse'
 
 export const useConnectedUser = defineStore('connectedUser', () => {
 	const { $patch } = useConnectedUser()

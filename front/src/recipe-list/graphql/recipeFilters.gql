@@ -1,0 +1,10 @@
+query RecipeFilters {
+	tags {
+		id
+		name
+	}
+	ingredients {
+		id
+		name
+	}
+}
