@@ -5,6 +5,7 @@ import { Repository } from 'typeorm'
 import { UseGuards } from '@nestjs/common'
 import { IsAdminGuard } from 'src/user/guards/is-admin.guard'
 import { TagService } from './tag.service'
+import { IsPublic } from 'src/auth/guards/is-public.guard'
 
 @Resolver(Tag)
 export class TagResolver {
@@ -21,7 +22,7 @@ export class TagResolver {
 	}
 
 	@Query(() => [Tag])
-	@UseGuards(IsAdminGuard)
+	@IsPublic()
 	tags(): Promise<Tag[]> {
 		return this.tagRepository.find()
 	}
