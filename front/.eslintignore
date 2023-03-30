@@ -1,6 +1,6 @@
 dist
 public
-src/common/generated/
+src/common/generated/**
 .env.local
 **/*.json
 **/*.yml
