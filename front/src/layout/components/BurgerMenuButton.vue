@@ -16,7 +16,7 @@ const { isVisitor } = useUserRole()
 			<CloseDrawer @click-close-drawer="isOpen = !isOpen" />
 		</div>
 		<div class="flex justify-center">
-			<NavbarIcon img-link="public/logo.svg" class="q-pa-md" />
+			<NavbarIcon img-link="/logo.svg" class="q-pa-md" />
 		</div>
 		<div class="flex column content-center">
 			<BurgerMenuLinks />
