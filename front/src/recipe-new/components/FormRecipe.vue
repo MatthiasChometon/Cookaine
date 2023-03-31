@@ -112,7 +112,7 @@ onDone((result: GraphqlResult) => {
 	)
 	if (result.errors) return
 
-	router.replace(`/`)
+	router.replace(`/my-recipes`)
 })
 </script>
 

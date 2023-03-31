@@ -20,7 +20,7 @@ onDone((result) => {
 	sendNotification(
 		result,
 		'Un code de validation a été envoyé à votre adresse mail',
-		'Une erreur est survenue lors de la créationde de votre compte',
+		'Une erreur est survenue lors de la création de votre compte',
 	)
 	if (result.errors) return
 

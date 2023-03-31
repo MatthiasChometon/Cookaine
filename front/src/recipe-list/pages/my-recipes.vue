@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { useAdminRecipeFiltersQuery } from '~/common/generated/graphql'
-
 const defaultOptions = {
 	filterBy: {
 		pagination: { page: 1, itemsPerPage: 3 },
+		isFromConnectedUser: true,
 	},
 }
 const options = ref(defaultOptions)
@@ -15,7 +14,7 @@ const {
 	loading: isLoadingFilters,
 	onError: onErrorFilters,
 	error: hasFiltersError,
-} = useAdminRecipeFiltersQuery()
+} = useRecipeFiltersQuery()
 const {
 	result: recipesResult,
 	loading: isLoadingRecipes,

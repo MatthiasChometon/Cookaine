@@ -15,7 +15,7 @@ const router = useRouter()
 		style="width: 300px"
 		@click="router.push(`/recipe/${props.id}`)"
 	>
-		<q-img :src="props.img" alt="" style="width: 250px; height: 250px" />
+		<q-img :src="props.img" alt="" style="width: 100%; height: 250px" />
 		<h6 class="text-center">{{ props.title }}</h6>
 
 		<div class="flex row justify-around q-pa-md">

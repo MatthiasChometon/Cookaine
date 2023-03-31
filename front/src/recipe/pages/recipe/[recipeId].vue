@@ -35,7 +35,7 @@ const current_portion = ref(result.value?.recipe.portion)
 				</div>
 
 				<div class="flex column q-ma-md q-pa-sm">
-					<p class="text-h6">Temps de preparation</p>
+					<p class="text-h6">Temps de préparation</p>
 					<span>
 						{{ result?.recipe.cookingTime }}
 					</span>
