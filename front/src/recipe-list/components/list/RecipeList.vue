@@ -8,7 +8,7 @@ const { recipes } = defineProps<{
 </script>
 
 <template>
-	<div style="height: 90%" class="flex">
+	<div class="flex justify-center">
 		<CardRecipe
 			v-for="recipe in recipes"
 			:key="recipe.id"

@@ -22,8 +22,9 @@ const { isVisitor } = useUserRole()
 			<BurgerMenuLinks />
 		</div>
 		<div class="flex column content-center">
-			<NavbarSearch
+			<RecipeSearch
 				:dark="false"
+				class="q-ml-md"
 				label-color="primary"
 				width="width:250px"
 				bg="primary"
