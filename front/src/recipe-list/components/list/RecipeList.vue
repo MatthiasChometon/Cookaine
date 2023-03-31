@@ -11,6 +11,7 @@ const { recipes } = defineProps<{
 	<div style="height: 90%" class="flex">
 		<CardRecipe
 			v-for="recipe in recipes"
+			:id="recipe.id"
 			:key="recipe.id"
 			:title="recipe.title"
 			class="flex column"

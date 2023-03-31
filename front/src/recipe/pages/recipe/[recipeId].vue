@@ -15,7 +15,11 @@ const current_portion = ref(result.value?.recipe.portion)
 	>
 		<q-card class="q-ma-md flex column" style="width: 20%; height: fit-content">
 			<div class="flex column justify-center" style="width: 100%">
-				<q-img :src="result?.recipe.previewPicture" alt="" />
+				<q-img
+					:src="result?.recipe.previewPicture"
+					alt=""
+					style="width: 100%; height: 300px"
+				/>
 
 				<div class="flex column q-ma-md q-pa-sm">
 					<span class="text-h6">Tags associes</span>
@@ -44,8 +48,7 @@ const current_portion = ref(result.value?.recipe.portion)
 			</div>
 		</q-card>
 		<div style="width: 75%">
-			<h4 class="text-center">{{ result?.recipe.title }}</h4>
-
+			<h4 class="text-center q-ma-xs">{{ result?.recipe.title }}</h4>
 			<CounterPortion
 				:portion="result?.recipe.portion"
 				@calculate-less-than-people="
@@ -65,13 +68,13 @@ const current_portion = ref(result.value?.recipe.portion)
 				:base-portion="result.recipe.portion"
 			></ListIngredients>
 			<div class="flex column justify-start">
-				<h5 class="text-h5">Etapes</h5>
+				<h5 class="text-h5 text-center">Etapes</h5>
 				<q-card
 					v-for="(step, index) in result?.recipe.steps"
 					:key="index"
 					class="q-ma-md q-pa-md"
 				>
-					<p>Etape {{ index + 1 }}</p>
+					<p class="text-bold">Etape {{ index + 1 }}</p>
 					<span class="text-body1">
 						{{ step }}
 					</span>

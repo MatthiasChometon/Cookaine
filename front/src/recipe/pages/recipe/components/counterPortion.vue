@@ -29,7 +29,7 @@ function ifEgalZero() {
 </script>
 
 <template>
-	<div class="q-ma-xl flex justify-center">
+	<div class="q-ma-md flex justify-center">
 		<q-btn type="button" class="q-ma-sm" @click="calculateLessThanPeople()"
 			>-</q-btn
 		>
