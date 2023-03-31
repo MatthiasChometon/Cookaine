@@ -37,3 +37,4 @@ lerna-debug.log*
 .env*
 
 /cookaine-db-pg
+/src/schema.gql
