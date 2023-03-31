@@ -7,10 +7,9 @@ query RecipeAndIngredients($recipeId: String!) {
 		portion
 		steps
 		cookingTime
-    creatorId
 		creator {
 			id
-      email
+      		email
 		}
 		ingredients {
 			name
