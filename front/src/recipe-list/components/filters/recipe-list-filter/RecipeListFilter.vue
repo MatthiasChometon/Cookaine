@@ -25,7 +25,10 @@ const options: Ref = ref(defaultOptions)
 <template>
 	<q-card class="q-ma-md q-pa-md">
 		<p>Filtrer par :</p>
-		<RecipeSearch @update="(v) => (options.filterBy.search = v)" />
+		<RecipeSearch
+			class="q-mb-md"
+			@update="(v) => (options.filterBy.search = v)"
+		/>
 		<RecipeCreatorConnectedUserFilter
 			v-if="hasFilterByUserId"
 			:default-value="defaultOptions?.filterBy?.isFromConnectedUser ?? false"
