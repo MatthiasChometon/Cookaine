@@ -31,7 +31,6 @@ declare module '@vue/runtime-core' {
     Navbar: typeof import('./layout/components/Navbar.vue')['default']
     NavbarIcon: typeof import('./layout/components/NavbarIcon.vue')['default']
     NavbarLinks: typeof import('./layout/components/NavbarLinks.vue')['default']
-    NavbarSearch: typeof import('./layout/components/NavbarSearch.vue')['default']
     PaginationFilter: typeof import('./recipe-list/components/pagination/PaginationFilter.vue')['default']
     PasswordConfirmationInput: typeof import('./common/components/forms/PasswordConfirmationInput.vue')['default']
     RecipeCreatorConnectedUserFilter: typeof import('./recipe-list/components/filters/recipe-list-filter/filters/RecipeCreatorConnectedUserFilter.vue')['default']
