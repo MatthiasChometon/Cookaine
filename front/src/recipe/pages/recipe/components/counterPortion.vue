@@ -33,7 +33,7 @@ function ifEgalZero() {
 		<q-btn type="button" class="q-ma-sm" @click="calculateLessThanPeople()"
 			>-</q-btn
 		>
-		<div class="q-ma-sm flex items-center">{{ current_portion }} persones</div>
+		<div class="q-ma-sm flex items-center">{{ current_portion }} personnes</div>
 		<q-btn type="button" class="q-ma-sm" @click="calculateMoreThanPeople()"
 			>+</q-btn
 		>

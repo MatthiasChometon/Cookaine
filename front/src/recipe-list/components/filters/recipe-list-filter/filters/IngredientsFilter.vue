@@ -6,7 +6,7 @@ const ingredientNamesSelected = ref<string[]>([])
 </script>
 
 <template>
-	<p class="q-mt-md">Ingredients</p>
+	<p class="q-mt-md">Ingrédients</p>
 	<q-select
 		v-model="ingredientNamesSelected"
 		filled
