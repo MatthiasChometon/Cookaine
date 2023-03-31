@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { GraphqlResult } from '~/common/types/graphql/GraphqlResult'
+
 const recipeForm = ref({
 	title: '',
 	previewPicture: '',
@@ -102,7 +104,7 @@ onError(() => sendError('Une erreur est survenue'))
 const { onDone, mutate: createRecipe } = useCreateRecipeMutation()
 const router = useRouter()
 
-onDone((result) => {
+onDone((result: GraphqlResult) => {
 	sendNotification(
 		result,
 		'Recette ajouter',

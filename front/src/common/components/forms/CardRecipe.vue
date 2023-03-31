@@ -4,11 +4,17 @@ const props = defineProps<{
 	difficulty: string
 	img: string
 	title: string
+	id: string
 }>()
+const router = useRouter()
 </script>
 
 <template>
-	<q-card class="q-ma-md flex column" style="width: 300px">
+	<q-card
+		class="q-ma-md flex column"
+		style="width: 300px"
+		@click="router.push(`/recipe/${props.id}`)"
+	>
 		<q-img :src="props.img" alt="" />
 		<h6 class="text-center">{{ props.title }}</h6>
 
