@@ -9,3 +9,5 @@ node_modules
 *.log
 *.env*
 src/common/generated/
+auto-imports.d.ts
+components.d.ts
