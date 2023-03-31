@@ -38,11 +38,9 @@ export class RecipeService {
 	addTagsAndIngredientsToQuery(query: SelectQueryBuilder<Recipe>): SelectQueryBuilder<Recipe> {
 		return query
 			.leftJoinAndSelect('recipe.recipeIngredients', 'recipeIngredients')
-			.leftJoinAndSelect('recipeIngredients.ingredient', 'ingredient')
+			.leftJoinAndSelect('recipeIngredients.ingredient', 'ingredient', 'ingredient.id IS NOT NULL')
 			.leftJoinAndSelect('recipe.recipeTags', 'recipeTags')
-			.leftJoinAndSelect('recipeTags.tag', 'tag')
-			.where('recipeIngredients.id IS NOT NULL')
-			.where('recipeTags.id IS NOT NULL')
+			.leftJoinAndSelect('recipeTags.tag', 'tag', 'tag.id IS NOT NULL')
 	}
 
 	async search(input: RecipeSearchInput, userId?: string): Promise<RecipeOutput[]> {
