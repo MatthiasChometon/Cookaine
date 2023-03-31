@@ -5,13 +5,12 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    CounterPortion: typeof import('./recipe/pages/recipe/components/counterPortion.vue')['default']
-    EmailInput: typeof import('./common/components/forms/EmailInput.vue')['default']
     BurgerMenuButton: typeof import('./layout/components/BurgerMenuButton.vue')['default']
     BurgerMenuLinks: typeof import('./layout/components/BurgerMenuLinks.vue')['default']
     CardRecipe: typeof import('./common/components/forms/CardRecipe.vue')['default']
     CloseDrawer: typeof import('./layout/components/CloseDrawer.vue')['default']
     ConnexionButton: typeof import('./layout/components/ConnexionButton.vue')['default']
+    CounterPortion: typeof import('./recipe/pages/recipe/components/counterPortion.vue')['default']
     DeconnexionButton: typeof import('./layout/components/DeconnexionButton.vue')['default']
     DesktopNavbar: typeof import('./layout/components/DesktopNavbar.vue')['default']
     DifficultiesFilter: typeof import('./recipe-list/components/filters/recipe-list-filter/filters/DifficultiesFilter.vue')['default']
@@ -23,6 +22,7 @@ declare module '@vue/runtime-core' {
     IngredientsFilter: typeof import('./recipe-list/components/filters/recipe-list-filter/filters/IngredientsFilter.vue')['default']
     Input: typeof import('./recipe-new/components/Input.vue')['default']
     Link: typeof import('./layout/components/Link.vue')['default']
+    ListIngredients: typeof import('./recipe/pages/recipe/components/listIngredients.vue')['default']
     LoginForm: typeof import('./authentication/components/login/LoginForm.vue')['default']
     LoginLink: typeof import('./authentication/components/login/LoginLink.vue')['default']
     MaximumTimeCookingFilter: typeof import('./recipe-list/components/filters/recipe-list-filter/filters/MaximumTimeCookingFilter.vue')['default']

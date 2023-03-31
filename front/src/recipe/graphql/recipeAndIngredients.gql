@@ -3,15 +3,11 @@ query RecipeAndIngredients($recipeId: String!) {
 		id
 		title
 		tutorialVideo
+		previewPicture
 		difficulty
 		portion
 		steps
 		cookingTime
-    creatorId
-		creator {
-			id
-      email
-		}
 		ingredients {
 			name
 			quantity

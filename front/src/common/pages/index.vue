@@ -6,7 +6,7 @@ const { sendError } = useNotification()
 
 const { result, loading, onError, error } = useHomeRecipesQuery({
 	options: {
-		filterBy: { pagination: { page: 1, itemsPerPage: 2 } },
+		filterBy: { pagination: { page: 1, itemsPerPage: 3 } },
 		orderBy: {
 			name: RecipeOrderName.CreationDate,
 			direction: OrderDirection.Desc,
@@ -23,6 +23,7 @@ onError(() => sendError('Une erreur est survenue'))
 		<div v-if="!loading && !error" class="flex justify-around">
 			<div v-for="recipe in result?.recipes" :key="recipe.id">
 				<CardRecipe
+					:id="recipe.id"
 					:title="recipe.title"
 					:img="recipe.previewPicture"
 					:difficulty="DifficultyTranslation[recipe.difficulty]"

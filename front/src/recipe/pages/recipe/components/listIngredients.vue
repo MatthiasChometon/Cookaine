@@ -1,9 +1,12 @@
 <script setup lang="ts">
-const props = defineProps<{
-	ingredients: any[]
-}>()
+import { MesureUnitTranslation } from '~/common/enums/mesureUnitTranslation'
+import type { RecipeAndIngredientsQuery } from '~/common/generated/graphql'
 
-// TODO Change ungredient quantity by value in counterPortion
+const props = defineProps<{
+	ingredients: RecipeAndIngredientsQuery['recipe']['ingredients']
+	portion: number
+	basePortion: number
+}>()
 </script>
 
 <template>
@@ -16,11 +19,19 @@ const props = defineProps<{
 				class="q-ma-md q-pa-md"
 			>
 				<div>
-					<QImg src="{{ ingredient.previewPicture }}" alt="" />
+					<q-img
+						:src="ingredient.previewPicture"
+						alt=""
+						style="width: 250px; height: 250px"
+					/>
 				</div>
 				<span>
-					{{ ingredient.name }} / {{ ingredient.quantity }}
-					{{ ingredient.mesureUnit }}
+					<p class="text-bold">
+						{{ Math.round((ingredient.quantity * portion) / basePortion) }}
+						{{ MesureUnitTranslation[ingredient.mesureUnit] }}
+					</p>
+
+					{{ ingredient.name }}
 				</span>
 			</q-card>
 		</div>

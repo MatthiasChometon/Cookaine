@@ -1,69 +1,69 @@
 <script setup lang="ts">
+import { DifficultyTranslation } from '~/common/enums/difficultyTranslation'
+
 const route = useRoute()
 const recipeId = String(route.params.recipeId)
 
-const { result, loading } = useRecipeAndIngredientsQuery({ recipeId })
+const { result, loading, error } = useRecipeAndIngredientsQuery({ recipeId })
+const current_portion = ref(result.value?.recipe.portion)
 </script>
 
 <template>
-	<div class="q-pa-md q-pa-md flex row">
-		<!-- aside -->
-		<q-card
-			class="q-ma-md flex column"
-			style="width: 300px; background: rgb(230, 230, 230)"
-		>
-			<!-- TODO Set back button -->
-			<div class="flex column justify-center" style="height: 100vh">
-				<QImg src="" alt="" />
+	<div
+		v-if="!loading && !error && result !== undefined"
+		class="q-pa-md q-pa-md flex row"
+	>
+		<q-card class="q-ma-md flex column" style="width: 20%; height: fit-content">
+			<div class="flex column justify-center" style="width: 100%">
+				<q-img :src="result?.recipe.previewPicture" alt="" />
 
-				<q-card class="flex q-ma-md q-pa-sm">
+				<div class="flex column q-ma-md q-pa-sm">
 					<span class="text-h6">Tags associes</span>
 					<div class="flex">
 						<span
 							v-for="(tag, index) in result?.recipe.tags"
 							:key="index"
-							class="q-pa-sm text-subtitle1"
+							class="q-pr-sm text-subtitle1"
 						>
 							{{ tag.name }}
 						</span>
 					</div>
-				</q-card>
+				</div>
 
-				<q-card class="flex q-ma-md q-pa-sm">
-					<p class="text-h6">Temps de preparation:</p>
-					<span class="text-h5">
+				<div class="flex column q-ma-md q-pa-sm">
+					<p class="text-h6">Temps de preparation</p>
+					<span>
 						{{ result?.recipe.cookingTime }}
 					</span>
-				</q-card>
+				</div>
 
-				<q-card class="flex q-ma-md q-pa-sm">
-					<p class="text-h6">Difficulte:</p>
-					<span class="text-h5">{{ result?.recipe.difficulty }}</span>
-				</q-card>
+				<div class="flex column q-ma-md q-pa-sm">
+					<p class="text-h6">Difficulte</p>
+					<span>{{ DifficultyTranslation[result?.recipe.difficulty] }}</span>
+				</div>
 			</div>
 		</q-card>
+		<div style="width: 75%">
+			<h4 class="text-center">{{ result?.recipe.title }}</h4>
 
-		<!-- main -->
-		<q-card
-			class="q-ma-md q-pa-md flex column justify-center"
-			style="width: 1400px; background: rgb(230, 230, 230)"
-		>
-			<h2 class="flex justify-center">{{ result?.recipe.title }}</h2>
-			<!-- Video -->
-			<div>
-				<video src="{{ result?.recipe.tutorialVideo }}"></video>
-			</div>
 			<CounterPortion
-				v-if="!loading"
 				:portion="result?.recipe.portion"
-				:ingredients="result?.recipe.ingredients"
+				@calculate-less-than-people="
+					(newportion) => {
+						current_portion = newportion
+					}
+				"
+				@calculate-more-than-people="
+					(newportion) => {
+						current_portion = newportion
+					}
+				"
 			></CounterPortion>
-			<!-- Ingredients -->
 			<ListIngredients
-				v-if="!loading"
 				:ingredients="result?.recipe.ingredients"
+				:portion="current_portion ?? result?.recipe.portion"
+				:base-portion="result.recipe.portion"
 			></ListIngredients>
-			<!-- Steps -->
 			<div class="flex column justify-start">
 				<h5 class="text-h5">Etapes</h5>
 				<q-card
@@ -71,12 +71,12 @@ const { result, loading } = useRecipeAndIngredientsQuery({ recipeId })
 					:key="index"
 					class="q-ma-md q-pa-md"
 				>
-					<p>Etape {{ index }}</p>
+					<p>Etape {{ index + 1 }}</p>
 					<span class="text-body1">
 						{{ step }}
 					</span>
 				</q-card>
 			</div>
-		</q-card>
+		</div>
 	</div>
 </template>
