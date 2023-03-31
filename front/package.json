@@ -6,7 +6,7 @@
 	},
 	"scripts": {
 		"build": "vite build",
-		"dev": "concurrently \"pnpm generate-gql-watch\" \"vite --port 4000\"",
+		"dev": "pnpm generate-gql && concurrently \"pnpm generate-gql-watch\" \"vite --port 4000\"",
 		"lint": "eslint .",
 		"preview": "vite preview",
 		"preview-https": "serve dist",

@@ -13,7 +13,8 @@ const { isVisitor } = useUserRole()
 				<NavbarLinks class="flex justify-center content-center" />
 			</div>
 			<div class="flex justify-between">
-				<NavbarSearch
+				<RecipeSearch
+					class="q-ml-md"
 					:dark="true"
 					label-color="white"
 					width="width : 350px"
