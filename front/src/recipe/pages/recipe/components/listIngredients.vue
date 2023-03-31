@@ -11,7 +11,8 @@ const props = defineProps<{
 
 <template>
 	<div class="flex column justify-start">
-		<h5 class="text-h5">Ingredients</h5>
+		<h5 class="text-h5 text-center q-ma-md">Ingredients</h5>
+
 		<div class="flex row justify-center">
 			<q-card
 				v-for="(ingredient, index) in props.ingredients"
