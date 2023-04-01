@@ -1,0 +1,6 @@
+query Tag($id: String!) {
+	tag(id: $id) {
+		id
+		name
+	}
+}

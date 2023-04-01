@@ -120,22 +120,3 @@ onDone((result) => {
 		</div>
 	</q-form>
 </template>
-
-<style lang="scss">
-@media (min-width: $breakpoint-sm-min) {
-	.recipeInformation {
-		display: flex;
-		justify-content: space-between;
-	}
-}
-
-@media (max-width: $breakpoint-sm-max) {
-	.recipeInformation {
-		flex-direction: column;
-	}
-
-	.recipeInformation div {
-		margin: unset !important;
-	}
-}
-</style>

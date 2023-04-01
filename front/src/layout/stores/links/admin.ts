@@ -12,7 +12,7 @@ const amdinLinks: Link[] = [
 		text: 'Utilisateurs',
 	},
 	{
-		page: '/',
+		page: '/tag-list',
 		text: 'Tags',
 	},
 	{

@@ -6,6 +6,8 @@ import { UseGuards } from '@nestjs/common'
 import { IsAdminGuard } from 'src/user/guards/is-admin.guard'
 import { TagService } from './tag.service'
 import { IsPublic } from 'src/auth/guards/is-public.guard'
+import { CreateTagInput } from './dto/create-tag.input'
+import { UpdateTagInput } from './dto/update-tag.input'
 
 @Resolver(Tag)
 export class TagResolver {
@@ -25,5 +27,22 @@ export class TagResolver {
 	@IsPublic()
 	tags(): Promise<Tag[]> {
 		return this.tagRepository.find()
+	}
+	@Query(() => Tag)
+	@IsPublic()
+	tag(@Args('id') id: string): Promise<Tag> {
+		return this.tagRepository.findOneBy({ id })
+	}
+
+	@Mutation(() => Tag)
+	@IsPublic()
+	createTag(@Args('input') input: CreateTagInput): Promise<Tag> {
+		return this.tagService.createTag(input)
+	}
+
+	@Mutation(() => Tag)
+	@UseGuards(IsAdminGuard)
+	updateTag(@Args('id') id: string, @Args('input') input: UpdateTagInput): Promise<Tag> {
+		return this.tagService.updateTag(id, input)
 	}
 }
