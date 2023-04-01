@@ -19,6 +19,7 @@ docker compose up
 lire les instructions sur le docker-compose.md
 importer les données de la base
 
+ouvrir un autre bash et taper :
 ```bash
 pnpm dev
 ```
