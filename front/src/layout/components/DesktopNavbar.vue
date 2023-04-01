@@ -12,15 +12,6 @@ const { isVisitor } = useUserRole()
 				/>
 				<NavbarLinks class="flex justify-center content-center" />
 			</div>
-			<div class="flex justify-between">
-				<RecipeSearch
-					class="q-ml-md"
-					:dark="true"
-					label-color="white"
-					width="width : 350px"
-					bg="white"
-				/>
-			</div>
 		</div>
 		<ConnexionButton
 			v-if="isVisitor"

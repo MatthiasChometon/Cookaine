@@ -21,15 +21,6 @@ const { isVisitor } = useUserRole()
 		<div class="flex column content-center">
 			<BurgerMenuLinks />
 		</div>
-		<div class="flex column content-center">
-			<RecipeSearch
-				:dark="false"
-				class="q-ml-md"
-				label-color="primary"
-				width="width:250px"
-				bg="primary"
-			/>
-		</div>
 		<ConnexionButton
 			v-if="isVisitor"
 			class="text-h6 q-pa-md flex text-primary justify-center"

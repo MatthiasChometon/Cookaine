@@ -8,7 +8,7 @@ const amdinLinks: Link[] = [
 		text: 'Recettes',
 	},
 	{
-		page: '/',
+		page: '/admin/users',
 		text: 'Utilisateurs',
 	},
 	{

@@ -1,16 +1,17 @@
 <script setup lang="ts">
-const { users } = defineProps<{
+import type { InputMaybe } from '~/common/generated/graphql'
+
+const { users, defaultValue } = defineProps<{
 	users: {
 		id: string
 		email: string
 	}[]
+	defaultValue: InputMaybe<string> | undefined
 }>()
 defineEmits(['update'])
+const defaultUser = computed(() => users.find((u) => u.id === defaultValue))
 
-const user = ref<{
-	id: string
-	email: string
-}>()
+const user = ref(defaultUser.value)
 </script>
 
 <template>
