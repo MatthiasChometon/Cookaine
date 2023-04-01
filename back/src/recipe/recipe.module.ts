@@ -7,9 +7,10 @@ import { IngredientModule } from 'src/ingredient/ingredient.module'
 import { TagModule } from 'src/tag/tag.module'
 import { Tag } from 'src/tag/entities/tag.entity'
 import { RecipeTag } from 'src/tag/entities/recipe-tag.entity'
+import { UpdateRecipeService } from './services/update-recipe.service'
 
 @Module({
 	imports: [TypeOrmModule.forFeature([Recipe, Tag, RecipeTag]), IngredientModule, TagModule],
-	providers: [RecipeResolver, RecipeService],
+	providers: [RecipeResolver, RecipeService, UpdateRecipeService],
 })
 export class RecipeModule {}
