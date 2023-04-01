@@ -1,6 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql'
 import { BaseEntity } from 'src/database/objects/base-entity'
-import { Column, Entity, Index, OneToMany } from 'typeorm'
+import { Column, DeleteDateColumn, Entity, Index, OneToMany } from 'typeorm'
 import { RecipeTag } from './recipe-tag.entity'
 
 @Entity({ name: 'tag' })
@@ -14,4 +14,7 @@ export class Tag extends BaseEntity {
 	@Field(() => [RecipeTag], { defaultValue: [] })
 	@OneToMany(() => RecipeTag, ({ tag }) => tag)
 	recipeTags: RecipeTag[]
+
+	@DeleteDateColumn({ name: 'deletedAt' })
+	deletedAt: Date
 }

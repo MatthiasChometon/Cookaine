@@ -5,6 +5,8 @@ import { Tag } from './entities/tag.entity'
 import { RecipeTag } from './entities/recipe-tag.entity'
 import { TagOutput } from './dto/tag.output'
 import { Recipe } from 'src/recipe/entities/recipe.entity'
+import { CreateTagInput } from './dto/create-tag.input'
+import { UpdateTagInput } from './dto/update-tag.input'
 
 @Injectable()
 export class TagService {
@@ -51,5 +53,15 @@ export class TagService {
 				return recipeTag
 			}),
 		)
+	}
+	async createTag(input: CreateTagInput): Promise<Tag> {
+		const result = await this.tagRepository.insert(input)
+		const id = result.identifiers[0].id
+		return await this.tagRepository.findOneByOrFail({ id })
+	}
+
+	async updateTag(id: string, input: UpdateTagInput): Promise<Tag> {
+		await this.tagRepository.update({ id }, input)
+		return await this.tagRepository.findOneByOrFail({ id })
 	}
 }

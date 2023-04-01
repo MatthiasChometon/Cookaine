@@ -9,6 +9,11 @@ const deleteIngredient = async (idIngredient: string) => {
 	await deleteIngredientMutation({ id: idIngredient })
 	await refetch()
 }
+const router = useRouter()
+
+const updateIngredient = (id: string) => {
+	router.push(`/ingredient-edit/${id}`)
+}
 const { sendNotification } = useNotification()
 onDone((result) => {
 	sendNotification(
@@ -17,7 +22,6 @@ onDone((result) => {
 		'Une erreur est survenue lors de la suppréssion de votre ingrédient',
 	)
 })
-const router = useRouter()
 </script>
 
 <template>
@@ -30,29 +34,15 @@ const router = useRouter()
 		/>
 	</div>
 
-	<div v-if="!loading && !error" class="flex justify-around">
-		<q-card
-			v-for="ingredient in result?.ingredients"
-			:key="ingredient.id"
-			class="q-ma-md q-pa-sm"
-			style="width: 30vw"
+	<div
+		v-if="!loading && !error && result?.ingredients !== undefined"
+		class="flex justify-around"
+	>
+		<CardList
+			:action-update="updateIngredient"
+			:action-delete="deleteIngredient"
+			:list-type="result?.ingredients"
 		>
-			<div class="flex flex justify-between">
-				<p class="q-ma-none">{{ ingredient.name }}</p>
-				<div>
-					<q-icon
-						name="edit"
-						style="font-size: 20px"
-						@click="router.push(`/ingredient-edit/${ingredient.id}`)"
-					/>
-
-					<q-icon
-						name="delete"
-						style="font-size: 20px"
-						@click="deleteIngredient(ingredient.id)"
-					/>
-				</div>
-			</div>
-		</q-card>
+		</CardList>
 	</div>
 </template>

@@ -52,7 +52,7 @@ const mesureUnitOptions = [
 
 const { sendNotification } = useNotification()
 
-const { onDone, mutate: createIngredien } = useCreateIngredientMutation()
+const { onDone, mutate: createIngredient } = useCreateIngredientMutation()
 const router = useRouter()
 
 onDone((result) => {
@@ -68,7 +68,7 @@ onDone((result) => {
 </script>
 
 <template>
-	<q-form class="q-ma-md" @submit="createIngredien({ input: ingredientForm })">
+	<q-form class="q-ma-md" @submit="createIngredient({ input: ingredientForm })">
 		<div>
 			<div class="flex q-mr-md justify-around" style="width: 100%">
 				<Input
@@ -104,22 +104,3 @@ onDone((result) => {
 		</div>
 	</q-form>
 </template>
-
-<style lang="scss">
-@media (min-width: $breakpoint-sm-min) {
-	.recipeInformation {
-		display: flex;
-		justify-content: space-between;
-	}
-}
-
-@media (max-width: $breakpoint-sm-max) {
-	.recipeInformation {
-		flex-direction: column;
-	}
-
-	.recipeInformation div {
-		margin: unset !important;
-	}
-}
-</style>
