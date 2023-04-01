@@ -2,6 +2,7 @@
 const { sendError } = useNotification()
 const { result, loading, error, onError } = useAdminUserListQuery()
 const { onError: onBanError, mutate: banUser } = useAdminBanUserMutation()
+const router = useRouter()
 
 onError(() =>
 	sendError('Une erreur est survenue lors de la récupération des utilisateurs'),
@@ -9,12 +10,6 @@ onError(() =>
 onBanError(() =>
 	sendError("Une erreur est survenue lors du banissement de l'utilisateur"),
 )
-
-const status = {
-	[UserStatus.IsActive]: 'actif',
-	[UserStatus.IsBanned]: 'bannie',
-	[UserStatus.IsPending]: 'confirmation en attente',
-}
 </script>
 
 <template>
@@ -30,13 +25,18 @@ const status = {
 					<p class="q-ma-none">{{ user.email }}</p>
 					<div>
 						<q-icon
+							name="edit"
+							style="font-size: 20px"
+							@click="router.push(`/admin/user/${user.id}`)"
+						/>
+						<q-icon
 							name="delete"
 							style="font-size: 20px"
 							@click="banUser({ id: user.id })"
 						/>
 					</div>
 				</div>
-				<p class="q-ma-none">status: {{ status[user.status] }}</p>
+				<UserStatus :user-status="user.status"></UserStatus>
 			</q-card>
 		</template>
 	</AdminList>
