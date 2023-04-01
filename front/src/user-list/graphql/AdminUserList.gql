@@ -1,0 +1,7 @@
+query AdminUserList {
+    users {
+        id
+        email
+        status
+    }
+}
