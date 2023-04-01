@@ -37,6 +37,7 @@ const options: Ref = ref(defaultOptions)
 		<RecipeCreatorFilter
 			v-if="users !== undefined"
 			:users="users"
+			:default-value="defaultOptions?.filterBy?.userId"
 			@update="(v) => (options.filterBy.userId = v)"
 		/>
 		<TagsFilter

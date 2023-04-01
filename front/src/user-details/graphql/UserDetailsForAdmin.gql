@@ -1,0 +1,20 @@
+query UserDetailsForAdmin ($id: String!) {
+    user (id: $id) {
+        id
+        email
+        role
+        status
+    }
+    tags {
+		id
+		name
+	}
+	ingredients {
+		id
+		name
+	}
+    users {
+        id
+        email
+    }
+}

@@ -14,7 +14,7 @@ const {
 	isLoadingRecipes,
 	hasRecipesError,
 	users,
-	hasFilterByUserId,
+	hasFilterByUserId = false,
 } = defineProps<{
 	isLoadingFilters: boolean
 	hasFiltersError: boolean
@@ -25,7 +25,7 @@ const {
 	ingredients: RecipeFiltersQuery['ingredients']
 	users?: { email: string; id: string }[]
 	recipes: RecipesWithFiltersQuery['recipes']
-	hasFilterByUserId: boolean
+	hasFilterByUserId?: boolean
 }>()
 
 defineEmits(['update:options', 'update:pagination'])
