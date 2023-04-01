@@ -10,8 +10,7 @@ git clone "https://github.com/MatthiasChometon/Cookaine.git"
 
 ## Lancer le back
 
-ouvrir un bash
-
+ouvrir un bash et taper :
 ```bash
 cd back
 docker compose up
@@ -26,8 +25,7 @@ pnpm dev
 
 ## Lancer le front
 
-ouvrir un autre bash
-
+ouvrir un autre bash et taper :
 ```bash
 cd front
 pnpm dev
