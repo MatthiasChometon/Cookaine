@@ -17,7 +17,11 @@ docker compose up
 ```
 
 lire les instructions sur le docker-compose.md
-importer les données de la base
+importer les données de la base :
+clique droit sur "Servers/cookaine/Databases/cookaine/schemas/public/tables"
+cliquer "query tool"
+drap and drop de "cookaine.backup" dans query tool
+executer query
 
 ouvrir un autre bash et taper :
 ```bash
