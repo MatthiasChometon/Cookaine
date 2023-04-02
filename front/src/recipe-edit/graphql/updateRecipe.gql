@@ -1,0 +1,5 @@
+mutation UpdateRecipe($recipeId: String!, $input : UpdateRecipeInput!) {
+		updateRecipe(recipeId: $recipeId, input : $input) {
+            id
+		}
+	}

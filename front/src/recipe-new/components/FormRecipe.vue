@@ -1,20 +1,15 @@
 <script setup lang="ts">
-import type { GraphqlResult } from '~/common/types/graphql/GraphqlResult'
+import type { DefaultRecipeForm } from '../interfaces/defaultRecipe'
 
-const recipeForm = ref({
-	title: '',
-	previewPicture: '',
-	tutorialVideo: '',
-	difficulty: Difficulty.Easy,
-	portion: 0,
-	cookingTime: '',
-	tagIds: [],
-	ingredients: [{ id: '', quantity: 0, mesureUnit: MesureUnit.Gram }],
-	steps: [''],
-})
+const props = defineProps<{
+	recipeValue: DefaultRecipeForm
+}>()
+defineEmits(['actionForm'])
 
-const ingredientList = ref(1)
-const stepsList = ref(1)
+const recipeForm = ref(props.recipeValue)
+
+const ingredientList = ref(recipeForm.value.ingredients.length)
+const stepsList = ref(recipeForm.value.steps.length)
 
 const addIngredient = () => {
 	ingredientList.value++
@@ -98,32 +93,17 @@ const mesureUnitOptions = [
 	},
 ]
 const { result, loading, error, onError } = useRecipeFiltersQuery()
-const { sendError, sendNotification } = useNotification()
+const { sendError } = useNotification()
 onError(() => sendError('Une erreur est survenue'))
-
-const { onDone, mutate: createRecipe } = useCreateRecipeMutation()
-const router = useRouter()
-
-onDone((result: GraphqlResult) => {
-	sendNotification(
-		result,
-		'Recette ajouter',
-		'Une erreur est survenue lors de la création de votre recette',
-	)
-	if (result.errors) return
-
-	router.replace(`/my-recipes`)
-})
 </script>
 
 <template>
 	<q-form
 		class="q-ma-md"
 		style="width: 70%"
-		@submit="createRecipe({ input: recipeForm })"
+		@submit="$emit('actionForm', recipeForm)"
 	>
 		<h6>Informations</h6>
-
 		<Input
 			type="text"
 			:model="recipeForm.title"
@@ -290,7 +270,7 @@ onDone((result: GraphqlResult) => {
 		</q-btn>
 
 		<div class="flex justify-center">
-			<q-btn label="Créer ma recette" type="submit" color="primary" />
+			<slot></slot>
 		</div>
 	</q-form>
 </template>

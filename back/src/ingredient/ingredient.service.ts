@@ -48,14 +48,14 @@ export class IngredientService {
 	convertToIngredientOutput(recipeIngredient: RecipeIngredient): IngredientOutput {
 		const { quantity, mesureUnit, id: recipeIngredientId, ingredient } = recipeIngredient
 		if (ingredient == null) console.log(recipeIngredient)
-		const { id: ingredientId, name, previewPicture, mesureUnits: possibleMesureUnits } = ingredient
+		const { id: ingredientId, name, previewPicture, mesureUnits: mesureUnits } = ingredient
 		return {
 			ingredientId,
 			recipeIngredientId,
 			name,
 			previewPicture,
 			quantity,
-			possibleMesureUnits,
+			mesureUnits,
 			mesureUnit,
 		}
 	}

@@ -8,4 +8,7 @@ export class TagOutput extends PickType(Tag, ['name']) {
 
 	@Field(() => ID)
 	recipeTagId: string
+
+	@Field()
+	name: string
 }

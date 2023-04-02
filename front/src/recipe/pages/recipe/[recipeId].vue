@@ -47,8 +47,10 @@ const current_portion = ref(result.value?.recipe.portion)
 				</div>
 			</div>
 		</q-card>
+
 		<div style="width: 75%">
 			<h4 class="text-center q-ma-xs">{{ result?.recipe.title }}</h4>
+			<q-video :ratio="16 / 9" :src="result.recipe.tutorialVideo" />
 			<CounterPortion
 				:portion="result?.recipe.portion"
 				@calculate-less-than-people="

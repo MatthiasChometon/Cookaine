@@ -20,5 +20,5 @@ export class IngredientOutput extends IntersectionType(
 	recipeIngredientId: string
 
 	@Field(() => [MesureUnit], { defaultValue: [] })
-	possibleMesureUnits: MesureUnit[]
+	mesureUnits: MesureUnit[]
 }
