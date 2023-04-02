@@ -10,23 +10,24 @@ const router = useRouter()
 </script>
 
 <template>
-	<q-card
-		class="q-ma-md flex column"
-		style="width: 300px"
-		@click="router.push(`/recipe/${props.id}`)"
-	>
-		<q-img :src="props.img" alt="" style="width: 100%; height: 250px" />
+	<q-card class="q-ma-md flex column" style="width: 300px">
+		<q-img
+			:src="props.img"
+			alt=""
+			style="width: 100%; height: 250px"
+			@click="router.push(`/recipe/${props.id}`)"
+		/>
 		<h6 class="text-center">{{ props.title }}</h6>
 
 		<div class="flex row justify-around q-pa-md">
-			<div class="flex column justify-around">
+			<div class="flex column">
 				<span>Temps:</span>
 				<span>Difficulte:</span>
-				<slot></slot>
 			</div>
 			<div class="flex column justify-around text-right text-subtitle1">
-				<span>{{ props.cookingTime }}</span>
-				<span>{{ props.difficulty }}</span>
+				<span class="text-bold">{{ props.cookingTime }}</span>
+				<span class="text-bold">{{ props.difficulty }}</span>
+				<slot></slot>
 			</div>
 		</div>
 	</q-card>

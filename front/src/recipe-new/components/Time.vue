@@ -12,7 +12,7 @@ defineEmits(['update:model'])
 		:label="label"
 		filled
 		mask="time"
-		:rules="['time']"
+		:rules="[(val: string | null) => (val !== null && val !== '') || 'Ce champs est obligatoire']"
 		@update:model-value="(e) => $emit('update:model', e)"
 	>
 		<template #append>
@@ -32,4 +32,3 @@ defineEmits(['update:model'])
 		</template>
 	</q-input>
 </template>
-m

@@ -49,7 +49,7 @@ const ingredientsNames = computed(() => ingredients.map(({ name }) => name))
 		/>
 		<div class="flex column justify-center content-center" style="flex: 4">
 			<div class="flex column justify-center content-center no-wrap">
-				<RecipeList :recipes="recipes" />
+				<RecipeList :recipes="recipes" :is-recipe-user="hasFilterByUserId" />
 				<PaginationFilter
 					v-if="!isLoadingRecipes && !hasRecipesError"
 					:default-value="defaultOptions.filterBy?.pagination?.page ?? 1"

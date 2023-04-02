@@ -6,5 +6,8 @@ query RecipesWithFilters($options: RecipeSearchInput!) {
 		previewPicture
 		difficulty
 		cookingTime
+		creator {
+			id
+		}
 	}
 }
